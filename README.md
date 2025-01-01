@@ -1,2 +1,2 @@
-# template-repo
-A template repository with Webpack, ESLint and Prettier packages
+# Battleship
+Classic Battleship game developed in TDD approach
