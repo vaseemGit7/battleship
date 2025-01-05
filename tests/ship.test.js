@@ -28,3 +28,12 @@ test("should increase number of hits", () => {
   newShip.hit();
   expect(newShip.hits).toBe(3);
 });
+
+test("should mark ship sunk when hits equals size", () => {
+  newShip.hit();
+  newShip.hit();
+  newShip.hit();
+  newShip.hit();
+  newShip.hit();
+  expect(newShip.isSunk).toBe(true);
+});
