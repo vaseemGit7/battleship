@@ -9,3 +9,8 @@ test("A Ship of size 5 is created", () => {
   const newShip = new Ship(5);
   expect(newShip.size).toBe(5);
 });
+
+test("should initialize hit property with zero", () => {
+  const newShip = new Ship(5);
+  expect(newShip.hits).toBe(0);
+});
