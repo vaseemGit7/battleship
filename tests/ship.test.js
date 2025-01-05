@@ -21,3 +21,10 @@ test("should initialize hit property with zero", () => {
 test("should initialize isSunk property with false", () => {
   expect(newShip.isSunk).toBe(false);
 });
+
+test("should increase number of hits", () => {
+  newShip.hit();
+  newShip.hit();
+  newShip.hit();
+  expect(newShip.hits).toBe(3);
+});
