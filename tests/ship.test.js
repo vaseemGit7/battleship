@@ -14,3 +14,8 @@ test("should initialize hit property with zero", () => {
   const newShip = new Ship(5);
   expect(newShip.hits).toBe(0);
 });
+
+test("should initialize isSunk property with false", () => {
+  const newShip = new Ship(5);
+  expect(newShip.isSunk).toBe(false);
+});
