@@ -1,3 +1,5 @@
 export default class Gameboard {
-  constructor() {}
+  constructor(size) {
+    this.size = size;
+  }
 }
