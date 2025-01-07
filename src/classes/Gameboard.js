@@ -5,4 +5,6 @@ export default class Gameboard {
       .fill()
       .map(() => Array(size).fill(null));
   }
+
+  placeShip(size, coords, orientation) {}
 }
