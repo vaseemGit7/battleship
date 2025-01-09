@@ -6,5 +6,11 @@ export default class Gameboard {
       .map(() => Array(size).fill(null));
   }
 
-  placeShip(size, coords, orientation) {}
+  placeShip(size, coords, orientation) {
+    if (orientation === "horizontal") {
+      for (let i = coords; i < size; i++) {
+        this.board[coords][i] = size;
+      }
+    }
+  }
 }
