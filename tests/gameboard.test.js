@@ -25,4 +25,9 @@ describe("Place ships at specific coordinates", () => {
   test("should there be function to place ship", () => {
     expect(typeof gameboard.placeShip).toBe("function");
   });
+
+  test("should place ship at coordinate (0,0)", () => {
+    gameboard.placeShip(1, 0, "horizontal");
+    expect(gameboard.board[0][0]).toBe(1);
+  });
 });
