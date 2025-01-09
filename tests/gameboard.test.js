@@ -30,4 +30,10 @@ describe("Place ships at specific coordinates", () => {
     gameboard.placeShip(1, 0, "horizontal");
     expect(gameboard.board[0][0]).toBe(1);
   });
+
+  test("should place ship at coordinate(0,4) in horizontal orientation", () => {
+    gameboard.placeShip(4, 0, "horizontal");
+    expect(gameboard.board[0][0]).toBe(4);
+    expect(gameboard.board[0][3]).toBe(4);
+  });
 });
