@@ -15,5 +15,11 @@ export default class Gameboard {
         this.board[coords][i] = size;
       }
     }
+
+    if (orientation === "vertical") {
+      for (let i = coords; i < size; i++) {
+        this.board[i][coords] = size;
+      }
+    }
   }
 }
