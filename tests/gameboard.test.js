@@ -37,7 +37,11 @@ describe("Place ships at specific coordinates", () => {
     expect(gameboard.board[0][3]).toBe(4);
   });
 
-  test("should not allow ship placement that exceeds board boundries", () => {
+  test("should not allow ship placement that exceeds board boundaries", () => {
     expect(gameboard.placeShip(5, 6, "horizontal")).toBe(false);
+  });
+
+  test("should prevent ship placement outside board boundaries", () => {
+    expect(gameboard.placeShip(2, 11, "horizontal")).toBe(false);
   });
 });
