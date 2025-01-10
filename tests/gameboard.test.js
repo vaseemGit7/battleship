@@ -44,4 +44,9 @@ describe("Place ships at specific coordinates", () => {
   test("should prevent ship placement outside board boundaries", () => {
     expect(gameboard.placeShip(2, 11, "horizontal")).toBe(false);
   });
+
+  test("should place ship at coordinate (0,0) in vertical orientation", () => {
+    gameboard.placeShip(1, 0, "vertical");
+    expect(gameboard.board[0][0]).toBe(1);
+  });
 });
