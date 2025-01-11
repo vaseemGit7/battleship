@@ -46,6 +46,15 @@ export default class Gameboard {
   }
 
   receiveAttack(coords) {
+    if (
+      coords.x < 0 ||
+      coords.x >= this.size ||
+      coords.y < 0 ||
+      coords.y >= this.size
+    ) {
+      throw new Error("Coordinates out of bounds");
+    }
+
     if (this.board[coords.x][coords.y] === null) {
       this.board[coords.x][coords.y] = "miss";
     }
