@@ -81,3 +81,15 @@ test("should prevent overlap ship placement", () => {
   gameboard.placeShip(2, { x: 0, y: 0 }, "horizontal");
   expect(gameboard.placeShip(3, { x: 0, y: 0 }, "vertical")).toBe(false);
 });
+
+describe("Recieve attack on ships", () => {
+  let gameboard;
+
+  beforeEach(() => {
+    gameboard = new Gameboard(10);
+  });
+
+  test("should there be a function to recieve attack", () => {
+    expect(typeof gameboard.recieveAttack).toBe("function");
+  });
+});
