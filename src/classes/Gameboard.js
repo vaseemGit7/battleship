@@ -8,11 +8,11 @@ export default class Gameboard {
 
   placeShip(size, coords, orientation) {
     if (orientation === "horizontal") {
-      if (coords + size > this.size) {
+      if (coords.y + size > this.size) {
         return false;
       }
-      for (let i = coords; i < size; i++) {
-        this.board[coords][i] = size;
+      for (let i = coords.y; i < size; i++) {
+        this.board[coords.x][i] = size;
       }
     }
 
