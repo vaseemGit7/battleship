@@ -109,4 +109,10 @@ describe("Recieve attack on ships", () => {
     gameboard.receiveAttack({ x: 3, y: 3 });
     expect(gameboard.board[3][3]).toBe("miss");
   });
+
+  test("should prevent attack outside board boundaries", () => {
+    expect(() => gameboard.receiveAttack({ x: 10, y: 0 })).toThrowError(
+      "Coordinates out of bounds",
+    );
+  });
 });
