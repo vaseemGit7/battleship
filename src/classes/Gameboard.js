@@ -44,4 +44,6 @@ export default class Gameboard {
       }
     }
   }
+
+  recieveAttack(coords) {}
 }
