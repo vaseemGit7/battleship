@@ -75,3 +75,9 @@ describe("Place ships at specific coordinates vertically", () => {
     expect(gameboard.placeShip(5, { x: 10, y: 0 }, "vertical")).toBe(false);
   });
 });
+
+test("should prevent overlap ship placement", () => {
+  const gameboard = new Gameboard(10);
+  gameboard.placeShip(2, { x: 0, y: 0 }, "horizontal");
+  expect(gameboard.placeShip(3, { x: 0, y: 0 }, "vertical")).toBe(false);
+});
