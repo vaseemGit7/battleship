@@ -66,4 +66,8 @@ describe("Place ships at specific coordinates vertically", () => {
     expect(gameboard.board[5][5]).toBe(5);
     expect(gameboard.board[6][5]).toBe(5);
   });
+
+  test("should not allow vertical ship placement that exceeds board boundaries", () => {
+    expect(gameboard.placeShip(3, { x: 8, y: 2 }, "vertical")).toBe(false);
+  });
 });
