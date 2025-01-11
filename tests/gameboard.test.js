@@ -1,4 +1,5 @@
 import Gameboard from "../src/classes/Gameboard";
+import Ship from "../src/classes/Ship";
 
 test("should initialize a gameboard instance", () => {
   const gameboard = new Gameboard();
@@ -83,13 +84,29 @@ test("should prevent overlap ship placement", () => {
 });
 
 describe("Recieve attack on ships", () => {
-  let gameboard;
+  let gameboard, shipOne, shipTwo, shipThree, shipFour, shipFive;
 
   beforeEach(() => {
     gameboard = new Gameboard(10);
+    shipOne = new Ship(2);
+    shipTwo = new Ship(3);
+    shipThree = new Ship(3);
+    shipFour = new Ship(4);
+    shipFive = new Ship(5);
+
+    gameboard.placeShip(shipOne, { x: 1, y: 6 }, "horizontal");
+    gameboard.placeShip(shipTwo, { x: 3, y: 0 }, "vertical");
+    gameboard.placeShip(shipThree, { x: 0, y: 2 }, "horizontal");
+    gameboard.placeShip(shipFour, { x: 6, y: 6 }, "vertical");
+    gameboard.placeShip(shipFive, { x: 4, y: 4 }, "horizontal");
   });
 
   test("should there be a function to recieve attack", () => {
-    expect(typeof gameboard.recieveAttack).toBe("function");
+    expect(typeof gameboard.receiveAttack).toBe("function");
+  });
+
+  test("should record miss when no ship exits at the attacked spot", () => {
+    gameboard.receiveAttack({ x: 3, y: 3 });
+    expect(gameboard.board[3][3]).toBe("miss");
   });
 });
