@@ -45,5 +45,9 @@ export default class Gameboard {
     }
   }
 
-  recieveAttack(coords) {}
+  receiveAttack(coords) {
+    if (this.board[coords.x][coords.y] === null) {
+      this.board[coords.x][coords.y] = "miss";
+    }
+  }
 }
