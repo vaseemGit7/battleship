@@ -46,7 +46,15 @@ describe("Place ships at specific coordinates horizontally", () => {
   });
 });
 
-test("should place ship at coordinate (0,0) in vertical orientation", () => {
-  gameboard.placeShip(1, 0, "vertical");
-  expect(gameboard.board[0][0]).toBe(1);
+describe("Place ships at specific coordinates vertically", () => {
+  let gameboard;
+
+  beforeEach(() => {
+    gameboard = new Gameboard(10);
+  });
+
+  test("should place ship at coordinate (0,0) in vertical orientation", () => {
+    gameboard.placeShip(1, { x: 0, y: 0 }, "vertical");
+    expect(gameboard.board[0][0]).toBe(1);
+  });
 });
