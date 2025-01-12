@@ -4,6 +4,7 @@ export default class Gameboard {
     this.board = Array(size)
       .fill()
       .map(() => Array(size).fill(null));
+    this.shipsSunk = 0;
   }
 
   placeShip(ship, coords, orientation) {
@@ -64,6 +65,10 @@ export default class Gameboard {
       let ship = this.board[coords.x][coords.y];
       ship.hit();
       this.board[coords.x][coords.y] = { ship, status: "hit" };
+
+      if (ship.isSunk) {
+        this.shipsSunk++;
+      }
     }
   }
 }
