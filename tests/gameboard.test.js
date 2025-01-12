@@ -132,4 +132,12 @@ describe("Recieve attack on ships", () => {
     gameboard.receiveAttack({ x: 1, y: 6 });
     expect(gameboard.board[1][6].ship.hits).toBe(1);
   });
+
+  test("should sink ship after every spots of the ship got hit", () => {
+    gameboard.receiveAttack({ x: 6, y: 6 });
+    gameboard.receiveAttack({ x: 7, y: 6 });
+    gameboard.receiveAttack({ x: 8, y: 6 });
+    gameboard.receiveAttack({ x: 9, y: 6 });
+    expect(gameboard.board[6][6].ship.isSunk).toBe(true);
+  });
 });
