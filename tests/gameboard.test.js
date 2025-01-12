@@ -157,5 +157,17 @@ describe("Recieve attack on ships", () => {
     test("should there be function to check fleet status", () => {
       expect(typeof gameboard.isFleetSunk).toBe("function");
     });
+
+    test("should report false when not all the ships have sunk", () => {
+      gameboard.receiveAttack({ x: 1, y: 6 });
+      gameboard.receiveAttack({ x: 1, y: 7 });
+
+      gameboard.receiveAttack({ x: 6, y: 6 });
+      gameboard.receiveAttack({ x: 7, y: 6 });
+      gameboard.receiveAttack({ x: 8, y: 6 });
+      gameboard.receiveAttack({ x: 9, y: 6 });
+
+      expect(gameboard.isFleetSunk()).toBe(false);
+    });
   });
 });
