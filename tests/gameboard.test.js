@@ -152,4 +152,10 @@ describe("Recieve attack on ships", () => {
 
     expect(gameboard.shipsSunk).toBe(2);
   });
+
+  describe("Report fleet status", () => {
+    test("should there be function to check fleet status", () => {
+      expect(typeof gameboard.isFleetSunk).toBe("function");
+    });
+  });
 });
