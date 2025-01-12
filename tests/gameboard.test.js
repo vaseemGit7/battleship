@@ -196,4 +196,11 @@ describe("Recieve attack on ships", () => {
       expect(gameboard.isFleetSunk()).toBe(true);
     });
   });
+
+  test("should prevent attack on already attacked spot", () => {
+    gameboard.receiveAttack({ x: 4, y: 4 });
+    expect(() => gameboard.receiveAttack({ x: 4, y: 4 })).toThrowError(
+      "This spot has already been attacked",
+    );
+  });
 });
