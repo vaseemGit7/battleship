@@ -57,6 +57,13 @@ export default class Gameboard {
 
     if (this.board[coords.x][coords.y] === null) {
       this.board[coords.x][coords.y] = "miss";
+      return;
+    }
+
+    if (this.board[coords.x][coords.y] !== null) {
+      let ship = this.board[coords.x][coords.y];
+      ship.hit();
+      this.board[coords.x][coords.y] = { ship, status: "hit" };
     }
   }
 }
