@@ -169,5 +169,31 @@ describe("Recieve attack on ships", () => {
 
       expect(gameboard.isFleetSunk()).toBe(false);
     });
+
+    test("should report true when all ships have sunk", () => {
+      gameboard.receiveAttack({ x: 1, y: 6 });
+      gameboard.receiveAttack({ x: 1, y: 7 });
+
+      gameboard.receiveAttack({ x: 0, y: 2 });
+      gameboard.receiveAttack({ x: 0, y: 3 });
+      gameboard.receiveAttack({ x: 0, y: 4 });
+
+      gameboard.receiveAttack({ x: 3, y: 0 });
+      gameboard.receiveAttack({ x: 4, y: 0 });
+      gameboard.receiveAttack({ x: 5, y: 0 });
+
+      gameboard.receiveAttack({ x: 6, y: 6 });
+      gameboard.receiveAttack({ x: 7, y: 6 });
+      gameboard.receiveAttack({ x: 8, y: 6 });
+      gameboard.receiveAttack({ x: 9, y: 6 });
+
+      gameboard.receiveAttack({ x: 4, y: 4 });
+      gameboard.receiveAttack({ x: 4, y: 5 });
+      gameboard.receiveAttack({ x: 4, y: 6 });
+      gameboard.receiveAttack({ x: 4, y: 7 });
+      gameboard.receiveAttack({ x: 4, y: 8 });
+
+      expect(gameboard.isFleetSunk()).toBe(true);
+    });
   });
 });
