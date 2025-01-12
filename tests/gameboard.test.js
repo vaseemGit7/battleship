@@ -127,4 +127,9 @@ describe("Recieve attack on ships", () => {
       "Coordinates out of bounds",
     );
   });
+
+  test("should hit ship when exists at the attacked spot", () => {
+    gameboard.receiveAttack({ x: 1, y: 6 });
+    expect(gameboard.board[1][6].ship.hits).toBe(1);
+  });
 });
