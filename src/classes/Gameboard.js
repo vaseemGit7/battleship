@@ -71,4 +71,8 @@ export default class Gameboard {
       }
     }
   }
+
+  isFleetSunk() {
+    return false;
+  }
 }
