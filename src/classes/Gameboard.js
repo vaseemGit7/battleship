@@ -73,6 +73,9 @@ export default class Gameboard {
   }
 
   isFleetSunk() {
+    if (this.shipsSunk === 5) {
+      return true;
+    }
     return false;
   }
 }
