@@ -17,7 +17,7 @@ test("should have a board length of the specified size", () => {
 });
 
 describe("Place ships at specific coordinates horizontally", () => {
-  let gameboard;
+  let gameboard, ship;
 
   beforeEach(() => {
     gameboard = new Gameboard(10);
@@ -28,59 +28,71 @@ describe("Place ships at specific coordinates horizontally", () => {
   });
 
   test("should place ship at coordinate (0,0)", () => {
-    gameboard.placeShip(1, { x: 0, y: 0 }, "horizontal");
-    expect(gameboard.board[0][0]).toBe(1);
+    ship = new Ship(1);
+    gameboard.placeShip(ship, { x: 0, y: 0 }, "horizontal");
+    expect(gameboard.board[0][0].size).toBe(1);
   });
 
   test("should place ship at coordinate(0,4) in horizontal orientation", () => {
-    gameboard.placeShip(4, { x: 0, y: 0 }, "horizontal");
-    expect(gameboard.board[0][0]).toBe(4);
-    expect(gameboard.board[0][3]).toBe(4);
+    ship = new Ship(4);
+    gameboard.placeShip(ship, { x: 0, y: 0 }, "horizontal");
+    expect(gameboard.board[0][0].size).toBe(4);
+    expect(gameboard.board[0][3].size).toBe(4);
   });
 
   test("should not allow ship placement that exceeds board boundaries", () => {
-    expect(gameboard.placeShip(5, { x: 3, y: 6 }, "horizontal")).toBe(false);
+    ship = new Ship(5);
+    expect(gameboard.placeShip(ship, { x: 3, y: 6 }, "horizontal")).toBe(false);
   });
 
   test("should prevent ship placement outside board boundaries", () => {
-    expect(gameboard.placeShip(2, { x: 0, y: 11 }, "horizontal")).toBe(false);
+    ship = new Ship(2);
+    expect(gameboard.placeShip(ship, { x: 0, y: 11 }, "horizontal")).toBe(
+      false,
+    );
   });
 });
 
 describe("Place ships at specific coordinates vertically", () => {
-  let gameboard;
+  let gameboard, ship;
 
   beforeEach(() => {
     gameboard = new Gameboard(10);
   });
 
   test("should place ship at coordinate (0,0) in vertical orientation", () => {
-    gameboard.placeShip(1, { x: 0, y: 0 }, "vertical");
-    expect(gameboard.board[0][0]).toBe(1);
+    ship = new Ship(1);
+    gameboard.placeShip(ship, { x: 0, y: 0 }, "vertical");
+    expect(gameboard.board[0][0].size).toBe(1);
   });
 
   test("should place ship at coordinate (2,5) in vertical orientation", () => {
-    gameboard.placeShip(5, { x: 2, y: 5 }, "vertical");
-    expect(gameboard.board[2][5]).toBe(5);
-    expect(gameboard.board[3][5]).toBe(5);
-    expect(gameboard.board[4][5]).toBe(5);
-    expect(gameboard.board[5][5]).toBe(5);
-    expect(gameboard.board[6][5]).toBe(5);
+    ship = new Ship(5);
+    gameboard.placeShip(ship, { x: 2, y: 5 }, "vertical");
+    expect(gameboard.board[2][5].size).toBe(5);
+    expect(gameboard.board[3][5].size).toBe(5);
+    expect(gameboard.board[4][5].size).toBe(5);
+    expect(gameboard.board[5][5].size).toBe(5);
+    expect(gameboard.board[6][5].size).toBe(5);
   });
 
   test("should not allow vertical ship placement that exceeds board boundaries", () => {
-    expect(gameboard.placeShip(3, { x: 8, y: 2 }, "vertical")).toBe(false);
+    ship = new Ship(3);
+    expect(gameboard.placeShip(ship, { x: 8, y: 2 }, "vertical")).toBe(false);
   });
 
   test("should not allow vertical ship placement outside board boundaries", () => {
-    expect(gameboard.placeShip(5, { x: 10, y: 0 }, "vertical")).toBe(false);
+    ship = new Ship(5);
+    expect(gameboard.placeShip(ship, { x: 10, y: 0 }, "vertical")).toBe(false);
   });
 });
 
 test("should prevent overlap ship placement", () => {
   const gameboard = new Gameboard(10);
-  gameboard.placeShip(2, { x: 0, y: 0 }, "horizontal");
-  expect(gameboard.placeShip(3, { x: 0, y: 0 }, "vertical")).toBe(false);
+  const shipOne = new Ship(2);
+  const shipTwo = new Ship(3);
+  gameboard.placeShip(shipOne, { x: 0, y: 0 }, "horizontal");
+  expect(gameboard.placeShip(shipTwo, { x: 0, y: 0 }, "vertical")).toBe(false);
 });
 
 describe("Recieve attack on ships", () => {

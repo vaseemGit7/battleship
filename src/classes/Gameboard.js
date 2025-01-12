@@ -6,8 +6,8 @@ export default class Gameboard {
       .map(() => Array(size).fill(null));
   }
 
-  placeShip(size, coords, orientation) {
-    for (let i = 0; i < size; i++) {
+  placeShip(ship, coords, orientation) {
+    for (let i = 0; i < ship.size; i++) {
       if (orientation === "horizontal") {
         if (
           coords.y + i >= this.size ||
@@ -27,20 +27,20 @@ export default class Gameboard {
     }
 
     if (orientation === "horizontal") {
-      if (coords.y + size > this.size) {
+      if (coords.y + ship.size > this.size) {
         return false;
       }
-      for (let i = coords.y; i < size; i++) {
-        this.board[coords.x][i] = size;
+      for (let i = coords.y; i < coords.y + ship.size; i++) {
+        this.board[coords.x][i] = ship;
       }
     }
 
     if (orientation === "vertical") {
-      if (coords.x + size > this.size) {
+      if (coords.x + ship.size > this.size) {
         return false;
       }
-      for (let i = coords.x; i < coords.x + size; i++) {
-        this.board[i][coords.y] = size;
+      for (let i = coords.x; i < coords.x + ship.size; i++) {
+        this.board[i][coords.y] = ship;
       }
     }
   }
