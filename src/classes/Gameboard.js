@@ -56,6 +56,14 @@ export default class Gameboard {
       throw new Error("Coordinates out of bounds");
     }
 
+    if (
+      this.board[coords.x][coords.y] !== null &&
+      (this.board[coords.x][coords.y] === "miss" ||
+        this.board[coords.x][coords.y].status === "hit")
+    ) {
+      throw new Error("This spot has already been attacked");
+    }
+
     if (this.board[coords.x][coords.y] === null) {
       this.board[coords.x][coords.y] = "miss";
       return;
