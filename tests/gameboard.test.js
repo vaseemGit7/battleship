@@ -140,4 +140,16 @@ describe("Recieve attack on ships", () => {
     gameboard.receiveAttack({ x: 9, y: 6 });
     expect(gameboard.board[6][6].ship.isSunk).toBe(true);
   });
+
+  test("should count the number of ships sunk", () => {
+    gameboard.receiveAttack({ x: 1, y: 6 });
+    gameboard.receiveAttack({ x: 1, y: 7 });
+
+    gameboard.receiveAttack({ x: 6, y: 6 });
+    gameboard.receiveAttack({ x: 7, y: 6 });
+    gameboard.receiveAttack({ x: 8, y: 6 });
+    gameboard.receiveAttack({ x: 9, y: 6 });
+
+    expect(gameboard.shipsSunk).toBe(2);
+  });
 });
