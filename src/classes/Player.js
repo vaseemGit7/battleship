@@ -1,3 +1,5 @@
 export default class Player {
-  constructor() {}
+  constructor(type) {
+    this.type = type;
+  }
 }
