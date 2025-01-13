@@ -9,3 +9,8 @@ test("should initialize a player instance with type (human)", () => {
   const player = new Player("human");
   expect(player.type).toBe("human");
 });
+
+test("should initialize a player instance with type (computer)", () => {
+  const player = new Player("computer");
+  expect(player.type).toBe("computer");
+});
