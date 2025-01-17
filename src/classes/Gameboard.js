@@ -7,6 +7,10 @@ export default class Gameboard {
     this.shipsSunk = 0;
   }
 
+  getCellState(coords) {
+    return this.board[coords.x][coords.y];
+  }
+
   placeShip(ship, coords, orientation) {
     for (let i = 0; i < ship.size; i++) {
       if (orientation === "horizontal") {
@@ -32,7 +36,7 @@ export default class Gameboard {
         return false;
       }
       for (let i = coords.y; i < coords.y + ship.size; i++) {
-        this.board[coords.x][i] = ship;
+        this.board[coords.x][i] = { ship, status: "intact" };
       }
     }
 
@@ -41,7 +45,7 @@ export default class Gameboard {
         return false;
       }
       for (let i = coords.x; i < coords.x + ship.size; i++) {
-        this.board[i][coords.y] = ship;
+        this.board[i][coords.y] = { ship, status: "intact" };
       }
     }
   }
@@ -58,23 +62,23 @@ export default class Gameboard {
 
     if (
       this.board[coords.x][coords.y] !== null &&
-      (this.board[coords.x][coords.y] === "miss" ||
+      (this.board[coords.x][coords.y].status === "miss" ||
         this.board[coords.x][coords.y].status === "hit")
     ) {
       throw new Error("This spot has already been attacked");
     }
 
     if (this.board[coords.x][coords.y] === null) {
-      this.board[coords.x][coords.y] = "miss";
+      this.board[coords.x][coords.y] = { status: "miss" };
       return;
     }
 
     if (this.board[coords.x][coords.y] !== null) {
-      let ship = this.board[coords.x][coords.y];
+      let ship = this.board[coords.x][coords.y].ship;
       ship.hit();
       this.board[coords.x][coords.y] = { ship, status: "hit" };
 
-      if (ship.isSunk) {
+      if (ship.isSunk()) {
         this.shipsSunk++;
       }
     }
