@@ -18,8 +18,12 @@ test("should initialize hit property with zero", () => {
   expect(newShip.hits).toBe(0);
 });
 
-test("should initialize isSunk property with false", () => {
-  expect(newShip.isSunk).toBe(false);
+test("should there be function to update ship hits", () => {
+  expect(typeof newShip.hit).toBe("function");
+});
+
+test("should there be function to check if ship sunk", () => {
+  expect(typeof newShip.isSunk).toBe("function");
 });
 
 test("should increase number of hits", () => {
@@ -35,5 +39,5 @@ test("should mark ship sunk when hits equals size", () => {
   newShip.hit();
   newShip.hit();
   newShip.hit();
-  expect(newShip.isSunk).toBe(true);
+  expect(newShip.isSunk()).toBe(true);
 });
