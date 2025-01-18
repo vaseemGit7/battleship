@@ -1,7 +1,8 @@
 import Player from "../classes/Player";
 import Ship from "../classes/Ship";
+import displayManager from "./displayManager";
 
-export default gameManager = (() => {
+const gameManager = (() => {
   let playerOne, playerTwo;
 
   const initializeGame = () => {
@@ -25,5 +26,14 @@ export default gameManager = (() => {
     playerTwo.board.placeShip(cruiser, { x: 4, y: 6 }, "horizontal");
     playerTwo.board.placeShip(battleship, { x: 5, y: 1 }, "vertical");
     playerTwo.board.placeShip(carrier, { x: 1, y: 1 }, "horizontal");
+
+    displayManager.renderBoard("playerOne", playerOne.board);
+    displayManager.renderBoard("playerTwo", playerTwo.board);
+  };
+
+  return {
+    initializeGame,
   };
 })();
+
+export default gameManager;
