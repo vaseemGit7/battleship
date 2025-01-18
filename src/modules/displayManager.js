@@ -18,7 +18,21 @@ const displayManager = (() => {
         const gridCol = document.createElement("div");
         gridCol.setAttribute("data-index-x", x);
         gridCol.setAttribute("data-index-y", y);
+        gridCol.classList.add("gameboard-cell");
         gridCol.style.cssText = "border: 1px solid black; height: 40px";
+
+        if (playerBoard.getCellState({ x: x, y: y }) !== null) {
+          if (playerBoard.getCellState({ x: x, y: y }).status === "intact") {
+            gridCol.style.cssText = "background-color: #0284c7";
+          } else if (
+            playerBoard.getCellState({ x: x, y: y }).status === "hit"
+          ) {
+            gridCol.style.cssText = "background-color: #dc2626";
+          } else {
+            gridCol.style.cssText = "background-color: #cbd5e1";
+          }
+        }
+
         gridRow.appendChild(gridCol);
       }
       player === "playerOne"
