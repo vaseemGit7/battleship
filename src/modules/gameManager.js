@@ -4,12 +4,14 @@ import displayManager from "./displayManager";
 
 const gameManager = (() => {
   let playerOne, playerTwo;
-  let currentPlayer = playerOne;
-  let opponentPlayer = playerTwo;
+  let currentPlayer, opponentPlayer;
 
   const initializeGame = () => {
     playerOne = new Player("human");
     playerTwo = new Player("computer");
+
+    currentPlayer = playerOne;
+    opponentPlayer = playerTwo;
 
     let carrier = new Ship(5);
     let battleship = new Ship(4);
@@ -31,6 +33,8 @@ const gameManager = (() => {
 
     displayManager.renderBoard("playerOne", playerOne.board);
     displayManager.renderBoard("playerTwo", playerTwo.board);
+
+    displayManager.initializeEventListeners();
   };
 
   const playTurn = (coords) => {
@@ -38,12 +42,22 @@ const gameManager = (() => {
   };
 
   const _attackOpponent = (coords) => {
-    opponentPlayer.board.recieveAttack(coords);
+    opponentPlayer.board.receiveAttack(coords);
+  };
+
+  const getCurrentPlayer = () => {
+    return currentPlayer;
+  };
+
+  const getOpponentPlayer = () => {
+    return opponentPlayer;
   };
 
   return {
     initializeGame,
     playTurn,
+    getCurrentPlayer,
+    getOpponentPlayer,
   };
 })();
 
