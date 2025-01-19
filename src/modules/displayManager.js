@@ -1,3 +1,5 @@
+import eventController from "./eventController";
+
 const displayManager = (() => {
   const boards = document.querySelectorAll(".player-board");
   const playerOneBoard = document.querySelector("#playerOneBoard");
@@ -40,8 +42,14 @@ const displayManager = (() => {
         : playerTwoBoard.appendChild(gridRow);
     }
   };
+
+  const initializeEventListeners = () => {
+    eventController.init();
+  };
+
   return {
     renderBoard,
+    initializeEventListeners,
   };
 })();
 
