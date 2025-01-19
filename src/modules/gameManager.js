@@ -4,6 +4,8 @@ import displayManager from "./displayManager";
 
 const gameManager = (() => {
   let playerOne, playerTwo;
+  let currentPlayer = playerOne;
+  let opponentPlayer = playerTwo;
 
   const initializeGame = () => {
     playerOne = new Player("human");
@@ -31,8 +33,17 @@ const gameManager = (() => {
     displayManager.renderBoard("playerTwo", playerTwo.board);
   };
 
+  const playTurn = (coords) => {
+    _attackOpponent(coords);
+  };
+
+  const _attackOpponent = (coords) => {
+    opponentPlayer.board.recieveAttack(coords);
+  };
+
   return {
     initializeGame,
+    playTurn,
   };
 })();
 
