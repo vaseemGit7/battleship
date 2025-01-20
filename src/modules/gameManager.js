@@ -39,6 +39,7 @@ const gameManager = (() => {
 
   const playTurn = (coords) => {
     _attackOpponent(coords);
+    displayManager.updateCell(opponentPlayer, coords);
   };
 
   const _attackOpponent = (coords) => {
