@@ -43,6 +43,25 @@ const displayManager = (() => {
     }
   };
 
+  const updateCell = (targetPlayer, coords) => {
+    let playerBoard =
+      `${targetPlayer}` === "playerOne" ? playerOneBoard : playerTwoBoard;
+
+    let cell = playerBoard.querySelector(
+      `[data-index-x = "${coords.x}"][data-index-y = "${coords.y}"]`,
+    );
+
+    if (targetPlayer.board.getCellState(coords) !== null) {
+      if (targetPlayer.board.getCellState(coords).status === "intact") {
+        cell.style.cssText = "background-color: #0284c7";
+      } else if (targetPlayer.board.getCellState(coords).status === "hit") {
+        cell.style.cssText = "background-color: #dc2626";
+      } else {
+        cell.style.cssText = "background-color: #cbd5e1";
+      }
+    }
+  };
+
   const initializeEventListeners = () => {
     eventController.init();
   };
@@ -50,6 +69,7 @@ const displayManager = (() => {
   return {
     renderBoard,
     initializeEventListeners,
+    updateCell,
   };
 })();
 
