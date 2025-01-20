@@ -45,7 +45,7 @@ const displayManager = (() => {
 
   const updateCell = (targetPlayer, coords) => {
     let playerBoard =
-      `${targetPlayer}` === "playerOne" ? playerOneBoard : playerTwoBoard;
+      targetPlayer.type === "human" ? playerOneBoard : playerTwoBoard;
 
     let cell = playerBoard.querySelector(
       `[data-index-x = "${coords.x}"][data-index-y = "${coords.y}"]`,
