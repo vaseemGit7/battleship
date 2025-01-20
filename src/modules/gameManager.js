@@ -40,10 +40,16 @@ const gameManager = (() => {
   const playTurn = (coords) => {
     _attackOpponent(coords);
     displayManager.updateCell(opponentPlayer, coords);
+    _switchPlayer();
   };
 
   const _attackOpponent = (coords) => {
     opponentPlayer.board.receiveAttack(coords);
+  };
+
+  const _switchPlayer = () => {
+    currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
+    opponentPlayer = opponentPlayer === playerTwo ? playerOne : playerTwo;
   };
 
   const getCurrentPlayer = () => {
