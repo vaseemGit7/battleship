@@ -62,6 +62,16 @@ const displayManager = (() => {
     }
   };
 
+  const switchBoardFocus = (targetPlayer) => {
+    playerOneBoard.style.borderColor = "black";
+    playerTwoBoard.style.borderColor = "black";
+
+    let playerBoard =
+      targetPlayer.type === "human" ? playerOneBoard : playerTwoBoard;
+
+    playerBoard.style.borderColor = "red";
+  };
+
   const initializeEventListeners = () => {
     eventController.init();
   };
@@ -70,6 +80,7 @@ const displayManager = (() => {
     renderBoard,
     initializeEventListeners,
     updateCell,
+    switchBoardFocus,
   };
 })();
 
