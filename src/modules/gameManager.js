@@ -33,6 +33,7 @@ const gameManager = (() => {
 
     displayManager.renderBoard("playerOne", playerOne.board);
     displayManager.renderBoard("playerTwo", playerTwo.board);
+    displayManager.switchBoardFocus(opponentPlayer);
 
     displayManager.initializeEventListeners();
   };
@@ -41,6 +42,7 @@ const gameManager = (() => {
     _attackOpponent(coords);
     displayManager.updateCell(opponentPlayer, coords);
     _switchPlayer();
+    displayManager.switchBoardFocus(opponentPlayer);
   };
 
   const _attackOpponent = (coords) => {
