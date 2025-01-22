@@ -1,6 +1,7 @@
 import Player from "../classes/Player";
 import Ship from "../classes/Ship";
 import displayManager from "./displayManager";
+import opponentAI from "./opponentAI";
 
 const gameManager = (() => {
   let playerOne, playerTwo;
@@ -43,6 +44,7 @@ const gameManager = (() => {
     displayManager.updateCell(opponentPlayer, coords);
     _switchPlayer();
     displayManager.switchBoardFocus(opponentPlayer);
+    _getComputerAttack();
   };
 
   const _attackOpponent = (coords) => {
@@ -52,6 +54,16 @@ const gameManager = (() => {
   const _switchPlayer = () => {
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
     opponentPlayer = opponentPlayer === playerTwo ? playerOne : playerTwo;
+  };
+
+  const _getComputerAttack = () => {
+    if (currentPlayer.type === "computer") {
+      const coords = opponentAI.getRandomAttack(opponentPlayer.board);
+      setTimeout(() => {
+        playTurn(coords);
+      }, "500");
+    }
+    return;
   };
 
   const getCurrentPlayer = () => {
