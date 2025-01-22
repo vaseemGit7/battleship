@@ -42,6 +42,7 @@ const gameManager = (() => {
   const playTurn = (coords) => {
     _attackOpponent(coords);
     displayManager.updateCell(opponentPlayer, coords);
+    _checkGameOver();
     _switchPlayer();
     displayManager.switchBoardFocus(opponentPlayer);
     _getComputerAttack();
@@ -62,6 +63,14 @@ const gameManager = (() => {
       setTimeout(() => {
         playTurn(coords);
       }, "500");
+    }
+    return;
+  };
+
+  const _checkGameOver = () => {
+    if (opponentPlayer.board.isFleetSunk()) {
+      console.log("Game Over: ", currentPlayer.type, " is the winner");
+      alert("Game Over: ", currentPlayer.type, " is the winner");
     }
     return;
   };
