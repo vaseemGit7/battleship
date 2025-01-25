@@ -1,4 +1,5 @@
 import eventController from "./eventController";
+import gameManager from "./gameManager";
 
 const displayManager = (() => {
   const boards = document.querySelectorAll(".player-board");
@@ -76,11 +77,24 @@ const displayManager = (() => {
     eventController.init();
   };
 
+  const loadPlacementScreen = (playerName) => {
+    const gameIntroScreen = document.querySelector(".game-intro-section");
+    const shipPlacementScreen = document.querySelector(
+      ".ship-placement-section",
+    );
+
+    gameIntroScreen.classList.add("screen-hidden");
+    shipPlacementScreen.classList.remove("screen-hidden");
+
+    gameManager.updatePlayerOneName(playerName);
+  };
+
   return {
     renderBoard,
     initializeEventListeners,
     updateCell,
     switchBoardFocus,
+    loadPlacementScreen,
   };
 })();
 
