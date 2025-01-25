@@ -7,7 +7,16 @@
     <script defer src="main.js"></script>
   </head>
   <body>
-    <section class="ship-placement-section">
+    <section class="game-intro-section">
+      <div class="player-name-container">
+        <label for="playerName">Fleet Commander</label>
+        <input type="text" id="playerName" placeholder="Enter your Name here" />
+        <button class="confirm-btn" id="confirmNameBtn" type="submit">
+          Confirm
+        </button>
+      </div>
+    </section>
+    <section class="ship-placement-section screen-hidden">
       <div class="player-board" id="shipPlacementBoard"></div>
     </section>
     <section class="gameboard-container screen-hidden">
