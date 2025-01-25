@@ -1,6 +1,16 @@
+import displayManager from "./displayManager";
 import gameManager from "./gameManager";
 
 const eventController = (() => {
+  const handlePlayerInput = () => {
+    const playerNameInput = document.querySelector("#playerName").value;
+    const confirmBtn = document.querySelector("#confirmNameBtn");
+
+    confirmBtn.addEventListener("click", () => {
+      displayManager.loadPlacementScreen(playerNameInput);
+    });
+  };
+
   const init = () => {
     const gameboardCells = document.querySelectorAll(".gameboard-cell");
 
@@ -22,7 +32,7 @@ const eventController = (() => {
     console.log(opponentBoard);
   };
 
-  return { init };
+  return { init, handlePlayerInput };
 })();
 
 export default eventController;
