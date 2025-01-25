@@ -1,4 +1,4 @@
 import "./style.css";
-import gameManager from "./modules/gameManager.js";
+import eventController from "./modules/eventController";
 
-gameManager.initializeGame();
+eventController.handlePlayerInput();
