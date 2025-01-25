@@ -7,10 +7,14 @@ const gameManager = (() => {
   let playerOne, playerTwo;
   let currentPlayer, opponentPlayer;
 
-  const initializeGame = () => {
-    playerOne = new Player("human");
-    playerTwo = new Player("computer");
+  playerOne = new Player("human");
+  playerTwo = new Player("computer");
 
+  const updatePlayerOneName = (name) => {
+    playerOne.name = name;
+  };
+
+  const initializeGame = () => {
     currentPlayer = playerOne;
     opponentPlayer = playerTwo;
 
@@ -92,6 +96,7 @@ const gameManager = (() => {
   return {
     initializeGame,
     playTurn,
+    updatePlayerOneName,
     getCurrentPlayer,
     getOpponentPlayer,
   };
