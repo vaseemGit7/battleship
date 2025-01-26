@@ -1,6 +1,7 @@
 import Player from "../classes/Player";
 import Ship from "../classes/Ship";
 import displayManager from "./displayManager";
+import eventController from "./eventController";
 import opponentAI from "./opponentAI";
 
 const gameManager = (() => {
@@ -11,11 +12,11 @@ const gameManager = (() => {
   playerFaux = new Player("setup");
 
   let fleet = {
-    1: { name: "carrier", details: { size: 5, coords: null } },
-    2: { name: "battleship", details: { size: 4, coords: null } },
-    3: { name: "cruiser", details: { size: 3, coords: null } },
-    4: { name: "submarine", details: { size: 3, coords: null } },
-    5: { name: "destroyer", details: { size: 2, coords: null } },
+    1: { name: "carrier", size: 5 },
+    2: { name: "battleship", size: 4 },
+    3: { name: "cruiser", size: 3 },
+    4: { name: "submarine", size: 3 },
+    5: { name: "destroyer", size: 2 },
   };
   let currentVessel = 1;
 
@@ -26,9 +27,22 @@ const gameManager = (() => {
     playerOne.name = name;
   };
 
+  const updateShipPlacement = (coords, orientation) => {
+    console.log(fleet[currentVessel].name);
+    console.log("recieved coords", coords);
+
+    const vessel = fleet[currentVessel];
+    const ship = new Ship(vessel.size, vessel.name);
+
+    playerFaux.board.placeShip(ship, coords, orientation);
+
+    currentVessel++;
+  };
+
   const setupShipPlacement = () => {
     displayManager.renderBoard("setup", playerFaux.board);
     displayManager.renderVessel();
+    eventController.initializeDragEvents(playerFaux.board);
   };
 
   const initializeGame = () => {
@@ -114,14 +128,20 @@ const gameManager = (() => {
     return fleet[currentVessel];
   };
 
+  const checkFleetPlaced = () => {
+    return currentVessel > Object.keys(fleet).length;
+  };
+
   return {
     setupShipPlacement,
     initializeGame,
     playTurn,
     updatePlayerOneName,
+    updateShipPlacement,
     getCurrentPlayer,
     getOpponentPlayer,
     getCurrentVessel,
+    checkFleetPlaced,
   };
 })();
 
