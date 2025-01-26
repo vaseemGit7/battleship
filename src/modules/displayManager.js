@@ -15,6 +15,8 @@ const displayManager = (() => {
   );
 
   const renderBoard = (player, playerBoard) => {
+    shipPlacementBoard.innerHTML = "";
+
     for (let x = 0; x < playerBoard.size; x++) {
       const gridRow = document.createElement("div");
       gridRow.style.cssText =
@@ -59,7 +61,7 @@ const displayManager = (() => {
     vesselName.textContent = vessel.name;
 
     vesselEle.classList.add("vessel");
-    vesselEle.style.cssText = `height: 40px; width: ${vessel.details.size * 40}px; background-color: blue`;
+    vesselEle.style.cssText = `height: 40px; width: ${vessel.size * 40}px; background-color: blue`;
     vesselEle.draggable = "true";
 
     vesselContainer.appendChild(vesselName);
@@ -110,7 +112,6 @@ const displayManager = (() => {
 
     gameManager.updatePlayerOneName(playerName);
     gameManager.setupShipPlacement();
-    eventController.initializeDragEvents();
   };
 
   return {
