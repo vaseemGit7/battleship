@@ -6,12 +6,29 @@ import opponentAI from "./opponentAI";
 const gameManager = (() => {
   let playerOne, playerTwo;
   let currentPlayer, opponentPlayer;
+  let playerFaux;
+
+  playerFaux = new Player("setup");
+
+  let fleet = {
+    1: { name: "carrier", details: { size: 5, coords: null } },
+    2: { name: "battleship", details: { size: 4, coords: null } },
+    3: { name: "cruiser", details: { size: 3, coords: null } },
+    4: { name: "submarine", details: { size: 3, coords: null } },
+    5: { name: "destroyer", details: { size: 2, coords: null } },
+  };
+  let currentVessel = 1;
 
   playerOne = new Player("human");
   playerTwo = new Player("computer");
 
   const updatePlayerOneName = (name) => {
     playerOne.name = name;
+  };
+
+  const setupShipPlacement = () => {
+    displayManager.renderBoard("setup", playerFaux.board);
+    displayManager.renderVessel();
   };
 
   const initializeGame = () => {
@@ -93,12 +110,18 @@ const gameManager = (() => {
     return opponentPlayer;
   };
 
+  const getCurrentVessel = () => {
+    return fleet[currentVessel];
+  };
+
   return {
+    setupShipPlacement,
     initializeGame,
     playTurn,
     updatePlayerOneName,
     getCurrentPlayer,
     getOpponentPlayer,
+    getCurrentVessel,
   };
 })();
 
