@@ -11,6 +11,34 @@ const eventController = (() => {
     });
   };
 
+  const initializeDragEvents = () => {
+    const vessel = document.querySelector(".vessel");
+    const gameboardCells = document.querySelectorAll(".gameboard-cell");
+
+    console.log(vessel, gameboardCells);
+
+    vessel.addEventListener("dragstart", () => {
+      console.log("Drag Started");
+    });
+
+    gameboardCells.forEach((cell) =>
+      cell.addEventListener("dragover", (e) => {
+        e.preventDefault();
+      }),
+    );
+
+    gameboardCells.forEach((cell) =>
+      cell.addEventListener("drop", (e) => {
+        e.preventDefault();
+
+        let x = cell.getAttribute("data-index-x");
+        let y = cell.getAttribute("data-index-y");
+
+        console.log("Dropped at", "x :", x, " y :", y);
+      }),
+    );
+  };
+
   const init = () => {
     const gameboardCells = document.querySelectorAll(".gameboard-cell");
 
@@ -32,7 +60,7 @@ const eventController = (() => {
     console.log(opponentBoard);
   };
 
-  return { init, handlePlayerInput };
+  return { init, initializeDragEvents, handlePlayerInput };
 })();
 
 export default eventController;
