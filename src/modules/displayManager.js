@@ -6,6 +6,8 @@ const displayManager = (() => {
   const playerOneBoard = document.querySelector("#playerOneBoard");
   const playerTwoBoard = document.querySelector("#playerTwoBoard");
 
+  const shipPlacementBoard = document.querySelector("#shipPlacementBoard");
+
   boards.forEach(
     (board) =>
       (board.style.cssText =
@@ -40,8 +42,28 @@ const displayManager = (() => {
       }
       player === "playerOne"
         ? playerOneBoard.appendChild(gridRow)
-        : playerTwoBoard.appendChild(gridRow);
+        : player === "playerTwo"
+          ? playerTwoBoard.appendChild(gridRow)
+          : shipPlacementBoard.appendChild(gridRow);
     }
+  };
+
+  const renderVessel = () => {
+    const vesselContainer = document.querySelector("#vesselContainer");
+    vesselContainer.innerHTML = "";
+
+    const vesselName = document.createElement("p");
+    const vesselEle = document.createElement("div");
+
+    const vessel = gameManager.getCurrentVessel();
+    vesselName.textContent = vessel.name;
+
+    vesselEle.classList.add("vessel");
+    vesselEle.style.cssText = `height: 40px; width: ${vessel.details.size * 40}px; background-color: blue`;
+    vesselEle.draggable = "true";
+
+    vesselContainer.appendChild(vesselName);
+    vesselContainer.appendChild(vesselEle);
   };
 
   const updateCell = (targetPlayer, coords) => {
@@ -87,10 +109,13 @@ const displayManager = (() => {
     shipPlacementScreen.classList.remove("screen-hidden");
 
     gameManager.updatePlayerOneName(playerName);
+    gameManager.setupShipPlacement();
+    eventController.initializeDragEvents();
   };
 
   return {
     renderBoard,
+    renderVessel,
     initializeEventListeners,
     updateCell,
     switchBoardFocus,
