@@ -11,9 +11,24 @@ const eventController = (() => {
     });
   };
 
+  const _handleOrientationAction = (vessel) => {
+    const orientationBtn = document.querySelector("#orientationBtn");
+
+    orientationBtn.addEventListener("click", () => {
+      vessel.classList.toggle("rotate");
+
+      let currentOrientation = vessel.getAttribute("data-orientation");
+      let newOrientation =
+        currentOrientation === "horizontal" ? "vertical" : "horizontal";
+      vessel.setAttribute("data-orientation", newOrientation);
+    });
+  };
+
   const initializeDragEvents = (playerBoard) => {
     const vessel = document.querySelector(".vessel");
     const gameboardCells = document.querySelectorAll(".gameboard-cell");
+
+    _handleOrientationAction(vessel);
 
     vessel.addEventListener("dragstart", () => {
       console.log("Drag Started");
@@ -34,20 +49,21 @@ const eventController = (() => {
 
         console.log("Dropped at", "x :", x, " y :", y);
 
-        let vessel = gameManager.getCurrentVessel();
+        let currentVessel = gameManager.getCurrentVessel();
+        let orientation = vessel.getAttribute("data-orientation");
 
         if (
           _validatePlacement(
             playerBoard.board,
             { x: x, y: y },
-            vessel.size,
-            "horizontal",
+            currentVessel.size,
+            orientation,
           )
         ) {
-          gameManager.updateShipPlacement({ x: x, y: y }, "horizontal");
+          gameManager.updateShipPlacement({ x: x, y: y }, orientation);
           displayManager.renderBoard("setup", playerBoard);
 
-          if (!gameManager.checkAllShipsPlaced()) {
+          if (!gameManager.checkFleetPlaced()) {
             console.log("triggered");
             displayManager.renderVessel();
             initializeDragEvents(playerBoard);
