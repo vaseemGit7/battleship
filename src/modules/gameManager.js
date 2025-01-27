@@ -35,6 +35,7 @@ const gameManager = (() => {
     const ship = new Ship(vessel.size, vessel.name);
 
     playerFaux.board.placeShip(ship, coords, orientation);
+    playerOne.board.placeShip(ship, coords, orientation);
 
     currentVessel++;
   };
@@ -49,7 +50,7 @@ const gameManager = (() => {
         vesselSize,
       );
 
-      const ship = new Ship(vesselName, vesselSize);
+      const ship = new Ship(vesselSize, vesselName);
 
       playerTwo.board.placeShip(
         ship,
@@ -76,30 +77,6 @@ const gameManager = (() => {
   const initializeBattle = () => {
     currentPlayer = playerOne;
     opponentPlayer = playerTwo;
-
-    let carrierOne = new Ship(5);
-    let battleshipOne = new Ship(4);
-    let cruiserOne = new Ship(3);
-    let submarineOne = new Ship(3);
-    let destroyerOne = new Ship(2);
-
-    let carrierTwo = new Ship(5);
-    let battleshipTwo = new Ship(4);
-    let cruiserTwo = new Ship(3);
-    let submarineTwo = new Ship(3);
-    let destroyerTwo = new Ship(2);
-
-    playerOne.board.placeShip(destroyerOne, { x: 1, y: 6 }, "horizontal");
-    playerOne.board.placeShip(submarineOne, { x: 3, y: 0 }, "vertical");
-    playerOne.board.placeShip(cruiserOne, { x: 0, y: 2 }, "horizontal");
-    playerOne.board.placeShip(battleshipOne, { x: 6, y: 6 }, "vertical");
-    playerOne.board.placeShip(carrierOne, { x: 4, y: 4 }, "horizontal");
-
-    playerTwo.board.placeShip(destroyerTwo, { x: 3, y: 3 }, "horizontal");
-    playerTwo.board.placeShip(submarineTwo, { x: 8, y: 4 }, "horizontal");
-    playerTwo.board.placeShip(cruiserTwo, { x: 4, y: 6 }, "horizontal");
-    playerTwo.board.placeShip(battleshipTwo, { x: 5, y: 1 }, "vertical");
-    playerTwo.board.placeShip(carrierTwo, { x: 1, y: 1 }, "horizontal");
 
     displayManager.renderBoard("playerOne", playerOne.board);
     displayManager.renderBoard("playerTwo", playerTwo.board);
