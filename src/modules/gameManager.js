@@ -39,10 +39,38 @@ const gameManager = (() => {
     currentVessel++;
   };
 
+  const _setupAIShipPlacement = () => {
+    for (const vesselIndex in fleet) {
+      let vesselName = fleet[vesselIndex].name;
+      let vesselSize = fleet[vesselIndex].size;
+
+      let placementData = opponentAI.generateRandomPlacement(
+        playerTwo.board,
+        vesselSize,
+      );
+
+      const ship = new Ship(vesselName, vesselSize);
+
+      playerTwo.board.placeShip(
+        ship,
+        placementData.coords,
+        placementData.orientation,
+      );
+
+      console.log(
+        "Ship Placed:",
+        vesselSize,
+        placementData.coords,
+        placementData.orientation,
+      );
+    }
+  };
+
   const setupShipPlacement = () => {
     displayManager.renderBoard("setup", playerFaux.board);
     displayManager.renderVessel();
     eventController.initializeDragEvents(playerFaux.board);
+    _setupAIShipPlacement();
   };
 
   const initializeGame = () => {
