@@ -9,3 +9,7 @@ body {
 .screen-hidden {
   display: none;
 }
+
+.rotate {
+  rotate: 90deg;
+}
