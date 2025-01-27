@@ -73,7 +73,7 @@ const gameManager = (() => {
     _setupAIShipPlacement();
   };
 
-  const initializeGame = () => {
+  const initializeBattle = () => {
     currentPlayer = playerOne;
     opponentPlayer = playerTwo;
 
@@ -162,7 +162,7 @@ const gameManager = (() => {
 
   return {
     setupShipPlacement,
-    initializeGame,
+    initializeBattle,
     playTurn,
     updatePlayerOneName,
     updateShipPlacement,
