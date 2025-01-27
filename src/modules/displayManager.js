@@ -63,6 +63,7 @@ const displayManager = (() => {
     vesselEle.classList.add("vessel");
     vesselEle.style.cssText = `height: 40px; width: ${vessel.size * 40}px; background-color: blue`;
     vesselEle.draggable = "true";
+    vesselEle.setAttribute("data-orientation", "horizontal");
 
     vesselContainer.appendChild(vesselName);
     vesselContainer.appendChild(vesselEle);
