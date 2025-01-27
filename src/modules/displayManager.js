@@ -115,6 +115,18 @@ const displayManager = (() => {
     gameManager.setupShipPlacement();
   };
 
+  const loadBattleScreen = () => {
+    const shipPlacementScreen = document.querySelector(
+      ".ship-placement-section",
+    );
+    const battleScreen = document.querySelector(".battle-section");
+
+    shipPlacementScreen.classList.add("screen-hidden");
+    battleScreen.classList.remove("screen-hidden");
+
+    gameManager.initializeBattle();
+  };
+
   return {
     renderBoard,
     renderVessel,
@@ -122,6 +134,7 @@ const displayManager = (() => {
     updateCell,
     switchBoardFocus,
     loadPlacementScreen,
+    loadBattleScreen,
   };
 })();
 
