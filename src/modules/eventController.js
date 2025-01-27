@@ -11,6 +11,15 @@ const eventController = (() => {
     });
   };
 
+  const handleDeployFleet = () => {
+    const proceedBtn = document.querySelector("#proceedBtn");
+    proceedBtn.disabled = false;
+
+    proceedBtn.addEventListener("click", () => {
+      displayManager.loadBattleScreen();
+    });
+  };
+
   const _handleOrientationAction = (vessel) => {
     const orientationBtn = document.querySelector("#orientationBtn");
 
@@ -69,6 +78,7 @@ const eventController = (() => {
             initializeDragEvents(playerBoard);
           } else {
             console.log("All ships placed!");
+            handleDeployFleet();
           }
         } else {
           console.log("Invalid placement");
