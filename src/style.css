@@ -16,9 +16,20 @@ body {
 }
 
 .game-intro-section {
-  border: 2px solid yellow;
   height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.player-name-container {
+  width: 95%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.75);
 }
