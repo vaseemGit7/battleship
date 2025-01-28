@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  background-color: #011826;
 }
 
 .screen-hidden {
@@ -12,4 +13,12 @@ body {
 
 .rotate {
   rotate: 90deg;
+}
+
+.game-intro-section {
+  border: 2px solid yellow;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
