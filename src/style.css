@@ -23,7 +23,8 @@ body {
   align-items: center;
 }
 
-.player-name-container {
+.player-name-container,
+.ship-placement-container {
   width: 95%;
   max-width: 480px;
   display: flex;
@@ -57,4 +58,8 @@ body {
   background-color: transparent;
   color: #ffffff;
   border: none;
+}
+
+.ship-placement-container {
+  max-width: 600px;
 }
