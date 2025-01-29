@@ -17,12 +17,19 @@
       </div>
     </section>
     <section class="ship-placement-section screen-hidden">
-      <div class="vessel-container" id="vesselContainer"></div>
-      <div>
-        <button id="orientationBtn">Rotate</button>
-        <button disabled id="proceedBtn">Deploy Fleet</button>
+      <div class="ship-placement-container">
+        <p class="current-vessel" id="currentVessel"></p>
+        <div class="ship-actions">
+          <button id="orientationBtn">Rotate</button>
+          <button id="randomBtn">Random</button>
+        </div>
+        <div class="vessel-container" id="vesselContainer"></div>
+        <div class="player-board" id="shipPlacementBoard"></div>
+        <div class="placement-actions">
+          <button id="resetBtn">Reset</button>
+          <button disabled id="proceedBtn">Deploy</button>
+        </div>
       </div>
-      <div class="player-board" id="shipPlacementBoard"></div>
     </section>
     <section class="battle-section screen-hidden">
       <div class="gameboard-container">
