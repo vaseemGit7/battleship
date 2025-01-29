@@ -52,20 +52,19 @@ const displayManager = (() => {
 
   const renderVessel = () => {
     const vesselContainer = document.querySelector("#vesselContainer");
+    const vesselName = document.querySelector("#currentVessel");
     vesselContainer.innerHTML = "";
 
-    const vesselName = document.createElement("p");
     const vesselEle = document.createElement("div");
 
     const vessel = gameManager.getCurrentVessel();
-    vesselName.textContent = vessel.name;
+    vesselName.textContent = `PLACE YOUR ${vessel.name}`;
 
     vesselEle.classList.add("vessel");
     vesselEle.style.cssText = `height: 40px; width: ${vessel.size * 40}px; background-color: blue`;
     vesselEle.draggable = "true";
     vesselEle.setAttribute("data-orientation", "horizontal");
 
-    vesselContainer.appendChild(vesselName);
     vesselContainer.appendChild(vesselEle);
   };
 

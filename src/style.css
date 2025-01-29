@@ -15,7 +15,8 @@ body {
   rotate: 90deg;
 }
 
-.game-intro-section {
+.game-intro-section,
+.ship-placement-section {
   height: 100dvh;
   display: flex;
   justify-content: center;
