@@ -14,6 +14,7 @@ const eventController = (() => {
   const handleDeployFleet = () => {
     const proceedBtn = document.querySelector("#proceedBtn");
     proceedBtn.disabled = false;
+    proceedBtn.classList.remove("disabled-btn");
 
     proceedBtn.addEventListener("click", () => {
       displayManager.loadBattleScreen();

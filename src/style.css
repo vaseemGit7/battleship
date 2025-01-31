@@ -11,6 +11,10 @@ body {
   display: none !important;
 }
 
+.disabled-btn {
+  opacity: 0.4 !important;
+}
+
 .rotate {
   rotate: 90deg;
 }
