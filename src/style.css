@@ -76,6 +76,30 @@ body {
 }
 
 .board-col {
+  position: relative;
   border: 1px solid #57859d;
   aspect-ratio: 1/1;
+}
+
+.cell-hit,
+.cell-miss {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.cell-hit::after,
+.cell-miss::after {
+  position: absolute;
+  content: "";
+  top: 25%;
+  left: 25%;
+  z-index: 1;
+  width: 50%;
+  height: 50%;
+  border-radius: 100%;
+  background-color: #dc2626;
+}
+
+.cell-miss::after {
+  background-color: #cbd5e1;
 }
