@@ -68,6 +68,13 @@ body {
   width: 95%;
   display: grid;
   grid-template-rows: repeat(10, 1fr);
+  background: rgb(2, 43, 67);
+  background: radial-gradient(
+    circle,
+    rgba(2, 43, 67, 0.5) 0%,
+    rgba(3, 66, 103, 0.5) 50%,
+    rgba(0, 119, 173, 0.5) 100%
+  );
 }
 
 .board-row {
@@ -85,6 +92,25 @@ body {
 .cell-miss {
   cursor: not-allowed;
   pointer-events: none;
+}
+
+.current-vessel {
+  margin: 0;
+  padding: 5px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.ship-actions,
+.placement-actions {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.vessel-container,
+.placement-actions {
+  padding: 15px;
 }
 
 .cell-hit::after,
