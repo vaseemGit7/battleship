@@ -48,11 +48,15 @@ body {
   border-radius: 4px;
 }
 
-.confirm-btn {
+.confirm-btn,
+.orientation-btn,
+.random-btn,
+.reset-btn,
+.proceed-btn {
   margin: 10px 0;
   padding: 4px 20px;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 5px;
   outline: 1px solid #ffffff;
   background-color: transparent;
@@ -99,18 +103,20 @@ body {
   padding: 5px;
   font-size: 1.4rem;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 .ship-actions,
 .placement-actions {
-  width: 60%;
+  width: 70%;
   display: flex;
   justify-content: space-between;
+  gap: 5px;
 }
 
 .vessel-container,
 .placement-actions {
-  padding: 15px;
+  padding: 15px 0;
 }
 
 .cell-hit::after,
