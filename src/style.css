@@ -63,3 +63,9 @@ body {
 .ship-placement-container {
   max-width: 600px;
 }
+
+.player-board {
+  width: 95%;
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+}
