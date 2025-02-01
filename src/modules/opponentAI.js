@@ -1,17 +1,35 @@
 const opponentAI = (() => {
+  let pivotHit = null;
+  let searchQueue = [];
+
   const getRandomAttack = (board) => {
     let isValid = false;
     let coords;
 
+    console.log("queue", searchQueue);
+    console.log("pivot", pivotHit);
+
+    while (searchQueue.length > 0) {
+      console.log("queue while");
+      let guessCoord = searchQueue.shift();
+      if (_validateAdjacent(guessCoord, board)) {
+        console.log("Coord", guessCoord);
+        processAttack(guessCoord, board);
+        return guessCoord;
+      }
+    }
+
     while (!isValid) {
+      console.log("random while");
+
       let x = Math.floor(Math.random() * 10);
       let y = Math.floor(Math.random() * 10);
-      console.log(x, y, board.getCellState({ x: x, y: y }));
       if (
         board.getCellState({ x: x, y: y }) === null ||
         board.getCellState({ x: x, y: y }).status === "intact"
       ) {
         console.log("within if: ", x, y, board.getCellState({ x: x, y: y }));
+        processAttack({ x: x, y: y }, board);
         coords = { x: x, y: y };
         isValid = true;
       }
@@ -75,6 +93,61 @@ const opponentAI = (() => {
     }
     return true;
   };
+
+  const _validateAdjacent = (coords, board) => {
+    console.log(coords, coords.x, coords.y);
+    if (
+      coords.x >= 0 &&
+      coords.x < board.size &&
+      coords.y >= 0 &&
+      coords.y < board.size
+    ) {
+      console.log(coords, " : true");
+      const cell = board.getCellState(coords);
+      return cell === null || (cell && cell.status === "intact");
+    }
+    console.log(coords, " : false");
+    return false;
+  };
+
+  const processAttack = (coords, board) => {
+    let left, right, top, bottom;
+    console.log("process attack");
+    if (
+      board.getCellState(coords) !== null &&
+      board.getCellState(coords).status === "intact"
+    ) {
+      pivotHit = coords;
+
+      left = { x: pivotHit.x, y: pivotHit.y - 1 };
+      right = { x: pivotHit.x, y: pivotHit.y + 1 };
+      top = { x: pivotHit.x - 1, y: pivotHit.y };
+      bottom = { x: pivotHit.x + 1, y: pivotHit.y };
+
+      if (
+        searchQueue.length === 0 &&
+        ((board.getCellState(left) &&
+          board.getCellState(left).status === "hit") ||
+          (board.getCellState(right) &&
+            board.getCellState(right).status === "hit"))
+      ) {
+        searchQueue = [left, right];
+      } else if (
+        searchQueue.length === 0 &&
+        ((board.getCellState(top) &&
+          board.getCellState(top).status === "hit") ||
+          (board.getCellState(bottom) &&
+            board.getCellState(bottom).status === "hit"))
+      ) {
+        searchQueue = [top, bottom];
+      } else {
+        searchQueue = [left, right, top, bottom];
+      }
+    } else if (searchQueue.length === 0) {
+      pivotHit = null;
+    }
+  };
+
   return { getRandomAttack, generateRandomPlacement };
 })();
 
