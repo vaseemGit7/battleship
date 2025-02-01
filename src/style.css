@@ -20,7 +20,8 @@ body {
 }
 
 .game-intro-section,
-.ship-placement-section {
+.ship-placement-section,
+.battle-section {
   height: 100dvh;
   display: flex;
   justify-content: center;
@@ -121,6 +122,18 @@ body {
 .vessel-container,
 .placement-actions {
   padding: 15px 0;
+}
+
+.gameboard-container {
+  width: 95%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 1.8rem;
+  color: #ffffff;
 }
 
 .cell-hit::after,
