@@ -136,6 +136,31 @@ body {
   color: #ffffff;
 }
 
+.board-panel {
+  width: 100%;
+  display: grid;
+  grid-template-rows: max-content max-content;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  font-size: 0.8rem;
+  padding: 15px;
+}
+
+.player-one-panel > .panel-name {
+  margin: 0;
+  justify-self: flex-start;
+}
+
+.player-two-panel > .panel-name {
+  margin: 0;
+  justify-self: flex-end;
+}
+
+.board-panel > .player-board {
+  margin-top: 10px;
+  width: 100%;
+}
+
 .cell-hit::after,
 .cell-miss::after {
   position: absolute;
