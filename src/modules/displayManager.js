@@ -2,31 +2,23 @@ import eventController from "./eventController";
 import gameManager from "./gameManager";
 
 const displayManager = (() => {
-  const boards = document.querySelectorAll(".player-board");
   const playerOneBoard = document.querySelector("#playerOneBoard");
   const playerTwoBoard = document.querySelector("#playerTwoBoard");
 
   const shipPlacementBoard = document.querySelector("#shipPlacementBoard");
-
-  boards.forEach(
-    (board) =>
-      (board.style.cssText =
-        "border: 2px solid black; max-width: 400px; display: grid; grid-template-rows: repeat(10,1fr); margin: 20px;"),
-  );
 
   const renderBoard = (player, playerBoard) => {
     shipPlacementBoard.innerHTML = "";
 
     for (let x = 0; x < playerBoard.size; x++) {
       const gridRow = document.createElement("div");
-      gridRow.style.cssText =
-        "display: grid; grid-template-columns: repeat(10,1fr)";
+      gridRow.classList.add("board-row");
       for (let y = 0; y < playerBoard.size; y++) {
         const gridCol = document.createElement("div");
         gridCol.setAttribute("data-index-x", x);
         gridCol.setAttribute("data-index-y", y);
         gridCol.classList.add("gameboard-cell");
-        gridCol.style.cssText = "border: 1px solid black; height: 40px";
+        gridCol.classList.add("board-col");
 
         if (playerBoard.getCellState({ x: x, y: y }) !== null) {
           if (playerBoard.getCellState({ x: x, y: y }).status === "intact") {
@@ -34,9 +26,9 @@ const displayManager = (() => {
           } else if (
             playerBoard.getCellState({ x: x, y: y }).status === "hit"
           ) {
-            gridCol.style.cssText = "background-color: #dc2626";
+            gridCol.classList.add("cell-hit");
           } else {
-            gridCol.style.cssText = "background-color: #cbd5e1";
+            gridCol.classList.add("cell-miss");
           }
         }
 
@@ -80,21 +72,24 @@ const displayManager = (() => {
       if (targetPlayer.board.getCellState(coords).status === "intact") {
         cell.style.cssText = "background-color: #0284c7";
       } else if (targetPlayer.board.getCellState(coords).status === "hit") {
-        cell.style.cssText = "background-color: #dc2626";
+        cell.classList.add("cell-hit");
       } else {
-        cell.style.cssText = "background-color: #cbd5e1";
+        cell.classList.add("cell-miss");
       }
     }
   };
 
   const switchBoardFocus = (targetPlayer) => {
-    playerOneBoard.style.borderColor = "black";
-    playerTwoBoard.style.borderColor = "black";
+    const playerOnePanel = document.querySelector(".player-one-panel");
+    const playerTwoPanel = document.querySelector(".player-two-panel");
 
-    let playerBoard =
-      targetPlayer.type === "human" ? playerOneBoard : playerTwoBoard;
+    playerOnePanel.classList.remove("board-focus");
+    playerTwoPanel.classList.remove("board-focus");
 
-    playerBoard.style.borderColor = "red";
+    let playerPanel =
+      targetPlayer.type === "human" ? playerTwoPanel : playerOnePanel;
+
+    playerPanel.classList.add("board-focus");
   };
 
   const initializeEventListeners = () => {
