@@ -11,6 +11,14 @@ const eventController = (() => {
     });
   };
 
+  const handleResetPlacement = () => {
+    const resetBtn = document.querySelector("#resetBtn");
+
+    resetBtn.addEventListener("click", () => {
+      gameManager.resetShipPlacement();
+    });
+  };
+
   const handleDeployFleet = () => {
     const proceedBtn = document.querySelector("#proceedBtn");
     proceedBtn.disabled = false;
@@ -130,7 +138,12 @@ const eventController = (() => {
     return true;
   };
 
-  return { init, initializeDragEvents, handlePlayerInput };
+  return {
+    init,
+    initializeDragEvents,
+    handlePlayerInput,
+    handleResetPlacement,
+  };
 })();
 
 export default eventController;
