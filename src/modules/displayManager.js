@@ -107,6 +107,7 @@ const displayManager = (() => {
 
     gameManager.updatePlayerOneName(playerName);
     gameManager.setupShipPlacement();
+    eventController.handleResetPlacement();
   };
 
   const loadBattleScreen = () => {
