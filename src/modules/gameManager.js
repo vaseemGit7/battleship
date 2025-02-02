@@ -74,6 +74,17 @@ const gameManager = (() => {
     _setupAIShipPlacement();
   };
 
+  const resetShipPlacement = () => {
+    playerFaux.board.board = Array(playerFaux.board.size)
+      .fill()
+      .map(() => Array(playerFaux.board.size).fill(null));
+
+    currentVessel = 1;
+    displayManager.renderBoard("setup", playerFaux.board);
+    displayManager.renderVessel();
+    eventController.initializeDragEvents(playerFaux.board);
+  };
+
   const initializeBattle = () => {
     currentPlayer = playerOne;
     opponentPlayer = playerTwo;
@@ -139,6 +150,7 @@ const gameManager = (() => {
 
   return {
     setupShipPlacement,
+    resetShipPlacement,
     initializeBattle,
     playTurn,
     updatePlayerOneName,
