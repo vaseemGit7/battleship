@@ -13,9 +13,21 @@ const eventController = (() => {
 
   const handleResetPlacement = () => {
     const resetBtn = document.querySelector("#resetBtn");
+    const proceedBtn = document.querySelector("#proceedBtn");
 
     resetBtn.addEventListener("click", () => {
+      proceedBtn.disabled = true;
+      proceedBtn.classList.add("disabled-btn");
       gameManager.resetShipPlacement();
+    });
+  };
+
+  const handleRandomizePlacement = () => {
+    const randomBtn = document.querySelector("#randomBtn");
+
+    randomBtn.addEventListener("click", () => {
+      gameManager.randomizeShipPlacement();
+      handleDeployFleet();
     });
   };
 
@@ -143,6 +155,7 @@ const eventController = (() => {
     initializeDragEvents,
     handlePlayerInput,
     handleResetPlacement,
+    handleRandomizePlacement,
   };
 })();
 
