@@ -35,24 +35,22 @@ const gameManager = (() => {
     const ship = new Ship(vessel.size, vessel.name);
 
     playerFaux.board.placeShip(ship, coords, orientation);
-    playerOne.board.placeShip(ship, coords, orientation);
-
     currentVessel++;
   };
 
-  const _setupAIShipPlacement = () => {
+  const _setupAIShipPlacement = (playerBoard) => {
     for (const vesselIndex in fleet) {
       let vesselName = fleet[vesselIndex].name;
       let vesselSize = fleet[vesselIndex].size;
 
       let placementData = opponentAI.generateRandomPlacement(
-        playerTwo.board,
+        playerBoard,
         vesselSize,
       );
 
       const ship = new Ship(vesselSize, vesselName);
 
-      playerTwo.board.placeShip(
+      playerBoard.placeShip(
         ship,
         placementData.coords,
         placementData.orientation,
@@ -71,7 +69,7 @@ const gameManager = (() => {
     displayManager.renderBoard("setup", playerFaux.board);
     displayManager.renderVessel();
     eventController.initializeDragEvents(playerFaux.board);
-    _setupAIShipPlacement();
+    _setupAIShipPlacement(playerTwo.board);
   };
 
   const resetShipPlacement = () => {
@@ -85,9 +83,17 @@ const gameManager = (() => {
     eventController.initializeDragEvents(playerFaux.board);
   };
 
+  const randomizeShipPlacement = () => {
+    resetShipPlacement();
+    _setupAIShipPlacement(playerFaux.board);
+    displayManager.renderBoard("setup", playerFaux.board);
+  };
+
   const initializeBattle = () => {
     currentPlayer = playerOne;
     opponentPlayer = playerTwo;
+
+    playerOne.board = playerFaux.board;
 
     displayManager.renderBoard("playerOne", playerOne.board);
     displayManager.renderBoard("playerTwo", playerTwo.board);
@@ -151,6 +157,7 @@ const gameManager = (() => {
   return {
     setupShipPlacement,
     resetShipPlacement,
+    randomizeShipPlacement,
     initializeBattle,
     playTurn,
     updatePlayerOneName,
