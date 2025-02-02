@@ -27,18 +27,19 @@ const eventController = (() => {
 
     randomBtn.addEventListener("click", () => {
       gameManager.randomizeShipPlacement();
-      handleDeployFleet();
+      _enableDeployBtn();
     });
   };
 
-  const handleDeployFleet = () => {
+  const _handleDeployFleet = () => {
+    const proceedBtn = document.querySelector("#proceedBtn");
+    proceedBtn.addEventListener("click", displayManager.loadBattleScreen);
+  };
+
+  const _enableDeployBtn = () => {
     const proceedBtn = document.querySelector("#proceedBtn");
     proceedBtn.disabled = false;
     proceedBtn.classList.remove("disabled-btn");
-
-    proceedBtn.addEventListener("click", () => {
-      displayManager.loadBattleScreen();
-    });
   };
 
   const _handleOrientationAction = (vessel) => {
@@ -99,7 +100,7 @@ const eventController = (() => {
             initializeDragEvents(playerBoard);
           } else {
             console.log("All ships placed!");
-            handleDeployFleet();
+            _enableDeployBtn();
           }
         } else {
           console.log("Invalid placement");
@@ -149,6 +150,8 @@ const eventController = (() => {
     }
     return true;
   };
+
+  _handleDeployFleet();
 
   return {
     init,
