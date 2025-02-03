@@ -123,6 +123,14 @@ const displayManager = (() => {
     gameManager.initializeBattle();
   };
 
+  const loadGameOverScreen = () => {
+    const battleScreen = document.querySelector(".battle-section");
+    const gameOverScreen = document.querySelector(".gameover-section");
+
+    battleScreen.classList.add("screen-hidden");
+    gameOverScreen.classList.remove("screen-hidden");
+  };
+
   return {
     renderBoard,
     renderVessel,
@@ -131,6 +139,7 @@ const displayManager = (() => {
     switchBoardFocus,
     loadPlacementScreen,
     loadBattleScreen,
+    loadGameOverScreen,
   };
 })();
 
