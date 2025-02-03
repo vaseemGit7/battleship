@@ -133,7 +133,9 @@ const gameManager = (() => {
   const _checkGameOver = () => {
     if (opponentPlayer.board.isFleetSunk()) {
       console.log("Game Over: ", currentPlayer.type, " is the winner");
-      alert("Game Over: ", currentPlayer.type, " is the winner");
+      setTimeout(() => {
+        displayManager.loadGameOverScreen();
+      }, "1000");
     }
     return;
   };
