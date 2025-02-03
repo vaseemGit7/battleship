@@ -162,11 +162,11 @@ const displayManager = (() => {
     if (player.type === "human") {
       playerName = player.name;
       phrase = winningPhrases[randomNum];
-      btnText = "Battle Again";
+      btnText = "BATTLE AGAIN";
     } else {
       playerName = "Enemy";
       phrase = losingPhrases[randomNum];
-      btnText = "Raise Again";
+      btnText = "RISE AGAIN";
     }
 
     winnerAnnouncement.textContent = `${playerName} conquered the sea`;
