@@ -3,11 +3,12 @@ import gameManager from "./gameManager";
 
 const eventController = (() => {
   const handlePlayerInput = () => {
-    const playerNameInput = document.querySelector("#playerName").value;
     const confirmBtn = document.querySelector("#confirmNameBtn");
 
     confirmBtn.addEventListener("click", () => {
+      const playerNameInput = document.querySelector("#playerName").value;
       displayManager.loadPlacementScreen(playerNameInput);
+      console.log("Name:", playerNameInput);
     });
   };
 
