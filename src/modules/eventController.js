@@ -32,6 +32,18 @@ const eventController = (() => {
     });
   };
 
+  const handlePlayAgain = () => {
+    const playAgainBtn = document.querySelector("#playAgainBtn");
+    const proceedBtn = document.querySelector("#proceedBtn");
+
+    proceedBtn.disabled = true;
+    proceedBtn.classList.add("disabled-btn");
+
+    playAgainBtn.addEventListener("click", () =>
+      displayManager.loadPlayAgain(),
+    );
+  };
+
   const _handleDeployFleet = () => {
     const proceedBtn = document.querySelector("#proceedBtn");
     proceedBtn.addEventListener("click", displayManager.loadBattleScreen);
@@ -160,6 +172,7 @@ const eventController = (() => {
     handlePlayerInput,
     handleResetPlacement,
     handleRandomizePlacement,
+    handlePlayAgain,
   };
 })();
 
