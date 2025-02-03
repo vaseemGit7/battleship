@@ -59,7 +59,8 @@ body {
 .orientation-btn,
 .random-btn,
 .reset-btn,
-.proceed-btn {
+.proceed-btn,
+.playagain-btn {
   margin: 10px 0;
   padding: 4px 20px;
   font-size: 1.2rem;
@@ -187,6 +188,28 @@ body {
 
 .player-two-panel.board-focus {
   align-self: self-end;
+}
+
+.winner-announcement {
+  margin: 0;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.gameover-phrase {
+  max-width: 80%;
+  padding: 15px;
+  margin: 0;
+  text-align: center;
+  text-wrap: balance;
+  font-size: 1rem;
+}
+
+.playagain-btn {
+  margin: 15px;
 }
 
 .cell-hit::after,
