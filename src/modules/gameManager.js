@@ -74,9 +74,7 @@ const gameManager = (() => {
   };
 
   const resetShipPlacement = () => {
-    playerFaux.board.board = Array(playerFaux.board.size)
-      .fill()
-      .map(() => Array(playerFaux.board.size).fill(null));
+    playerFaux = new Player("setup");
 
     currentVessel = 1;
     displayManager.renderBoard("setup", playerFaux.board);
@@ -88,6 +86,16 @@ const gameManager = (() => {
     resetShipPlacement();
     _setupAIShipPlacement(playerFaux.board);
     displayManager.renderBoard("setup", playerFaux.board);
+  };
+
+  const setupPlayAgain = () => {
+    const playerName = playerOne.name;
+
+    playerOne = new Player("human", playerName);
+    playerTwo = new Player("computer");
+
+    resetShipPlacement();
+    setupShipPlacement();
   };
 
   const initializeBattle = () => {
@@ -161,6 +169,7 @@ const gameManager = (() => {
 
   return {
     setupShipPlacement,
+    setupPlayAgain,
     resetShipPlacement,
     randomizeShipPlacement,
     initializeBattle,
