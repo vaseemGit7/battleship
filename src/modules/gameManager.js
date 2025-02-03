@@ -8,6 +8,7 @@ const gameManager = (() => {
   let playerOne, playerTwo;
   let currentPlayer, opponentPlayer;
   let playerFaux;
+  let winner;
 
   playerFaux = new Player("setup");
 
@@ -132,10 +133,12 @@ const gameManager = (() => {
 
   const _checkGameOver = () => {
     if (opponentPlayer.board.isFleetSunk()) {
+      winner = currentPlayer;
       console.log("Game Over: ", currentPlayer.type, " is the winner");
       setTimeout(() => {
         displayManager.loadGameOverScreen();
       }, "1000");
+      displayManager.updateWinner(winner);
     }
     return;
   };
