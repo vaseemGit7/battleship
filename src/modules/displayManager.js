@@ -2,6 +2,26 @@ import eventController from "./eventController";
 import gameManager from "./gameManager";
 
 const displayManager = (() => {
+  const winningPhrases = [
+    "Total Annihilation! The enemy fleet is no more!",
+    "Victory is yours! The seas bow to your command!",
+    "The enemy is vanquished! Your legend will be told for centuries!",
+    "Not a single enemy ship remains… This ocean belongs to you now!",
+    "A masterstroke of strategy! The enemy never stood a chance!",
+    "The last ship sinks beneath the waves… You have conquered the battlefield!",
+    "Your name will be etched in history as the greatest admiral!",
+  ];
+
+  const losingPhrases = [
+    "The sea claims your fleet… Defeat is absolute!",
+    "Darkness falls upon your navy. Not a single ship remains…",
+    "Your fleet lies in ruins… The enemy stands victorious!",
+    "The ocean whispers your failure as your last ship goes under!",
+    "Your forces fought bravely, but the enemy was merciless!",
+    "Your command ends here. The enemy has crushed your fleet!",
+    "A tragic loss… The battlefield is silent, save for the wreckage of your fleet!",
+  ];
+
   const playerOneBoard = document.querySelector("#playerOneBoard");
   const playerTwoBoard = document.querySelector("#playerTwoBoard");
 
@@ -131,11 +151,35 @@ const displayManager = (() => {
     gameOverScreen.classList.remove("screen-hidden");
   };
 
+  const updateWinner = (player) => {
+    const winnerAnnouncement = document.querySelector("#winnerAnnouncement");
+    const gameOverPhrase = document.querySelector("#gameOverPhrase");
+    const playAgainBtn = document.querySelector("#playAgainBtn");
+
+    let playerName, phrase, btnText;
+    let randomNum = Math.floor(Math.random() * 7);
+
+    if (player.type === "human") {
+      playerName = player.name;
+      phrase = winningPhrases[randomNum];
+      btnText = "Battle Again";
+    } else {
+      playerName = "Enemy";
+      phrase = losingPhrases[randomNum];
+      btnText = "Raise Again";
+    }
+
+    winnerAnnouncement.textContent = `${playerName} conquered the sea`;
+    gameOverPhrase.textContent = phrase;
+    playAgainBtn.textContent = btnText;
+  };
+
   return {
     renderBoard,
     renderVessel,
     initializeEventListeners,
     updateCell,
+    updateWinner,
     switchBoardFocus,
     loadPlacementScreen,
     loadBattleScreen,
