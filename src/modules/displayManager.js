@@ -30,6 +30,10 @@ const displayManager = (() => {
   const renderBoard = (player, playerBoard) => {
     shipPlacementBoard.innerHTML = "";
 
+    player === "playerOne"
+      ? (playerOneBoard.innerHTML = "")
+      : (playerTwoBoard.innerHTML = "");
+
     for (let x = 0; x < playerBoard.size; x++) {
       const gridRow = document.createElement("div");
       gridRow.classList.add("board-row");
@@ -149,6 +153,21 @@ const displayManager = (() => {
 
     battleScreen.classList.add("screen-hidden");
     gameOverScreen.classList.remove("screen-hidden");
+    eventController.handlePlayAgain();
+  };
+
+  const loadPlayAgain = () => {
+    const gameOverScreen = document.querySelector(".gameover-section");
+    const shipPlacementScreen = document.querySelector(
+      ".ship-placement-section",
+    );
+
+    gameOverScreen.classList.add("screen-hidden");
+    shipPlacementScreen.classList.remove("screen-hidden");
+
+    gameManager.setupPlayAgain();
+    eventController.handleResetPlacement();
+    eventController.handleRandomizePlacement();
   };
 
   const updateWinner = (player) => {
@@ -184,6 +203,7 @@ const displayManager = (() => {
     loadPlacementScreen,
     loadBattleScreen,
     loadGameOverScreen,
+    loadPlayAgain,
   };
 })();
 
