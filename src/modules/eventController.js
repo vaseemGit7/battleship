@@ -71,6 +71,7 @@ const eventController = (() => {
   const initializeDragEvents = (playerBoard) => {
     const vessel = document.querySelector(".vessel");
     const gameboardCells = document.querySelectorAll(".gameboard-cell");
+    let offsetX, offsetY;
 
     _handleOrientationAction(vessel);
 
@@ -78,11 +79,30 @@ const eventController = (() => {
       console.log("Drag Started");
     });
 
+    vessel.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      const rect = vessel.getBoundingClientRect();
+
+      offsetX = touch.clientX - rect.left;
+      offsetY = touch.clientY - rect.top;
+
+      vessel.style.position = "absolute";
+      console.log("Touch drag started");
+    });
+
     gameboardCells.forEach((cell) =>
       cell.addEventListener("dragover", (e) => {
         e.preventDefault();
       }),
     );
+
+    vessel.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+
+      const touch = e.touches[0];
+      vessel.style.left = touch.clientX - offsetX + "px";
+      vessel.style.top = touch.clientY - offsetY + "px";
+    });
 
     gameboardCells.forEach((cell) =>
       cell.addEventListener("drop", (e) => {
@@ -120,6 +140,44 @@ const eventController = (() => {
         }
       }),
     );
+
+    vessel.addEventListener("touchend", (e) => {
+      let touch = e.changedTouches[0];
+      let dropCell = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      if (dropCell && dropCell.classList.contains("gameboard-cell")) {
+        let x = parseInt(dropCell.getAttribute("data-index-x"));
+        let y = parseInt(dropCell.getAttribute("data-index-y"));
+
+        console.log("Dropped at", "x:", x, "y:", y);
+
+        let currentVessel = gameManager.getCurrentVessel();
+        let orientation = vessel.getAttribute("data-orientation");
+
+        if (
+          _validatePlacement(
+            playerBoard.board,
+            { x, y },
+            currentVessel.size,
+            orientation,
+          )
+        ) {
+          gameManager.updateShipPlacement({ x, y }, orientation);
+          displayManager.renderBoard("setup", playerBoard);
+
+          if (!gameManager.checkFleetPlaced()) {
+            console.log("triggered");
+            displayManager.renderVessel();
+            initializeDragEvents(playerBoard);
+          } else {
+            console.log("All ships placed!");
+            _enableDeployBtn();
+          }
+        } else {
+          console.log("Invalid placement");
+        }
+      }
+    });
   };
 
   const init = () => {
