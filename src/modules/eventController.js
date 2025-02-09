@@ -122,37 +122,7 @@ const eventController = (() => {
     gameboardCells.forEach((cell) =>
       cell.addEventListener("drop", (e) => {
         e.preventDefault();
-
-        let x = parseInt(cell.getAttribute("data-index-x"));
-        let y = parseInt(cell.getAttribute("data-index-y"));
-
-        console.log("Dropped at", "x :", x, " y :", y);
-
-        let currentVessel = gameManager.getCurrentVessel();
-        let orientation = vessel.getAttribute("data-orientation");
-
-        if (
-          _validatePlacement(
-            playerBoard.board,
-            { x: x, y: y },
-            currentVessel.size,
-            orientation,
-          )
-        ) {
-          gameManager.updateShipPlacement({ x: x, y: y }, orientation);
-          displayManager.renderBoard("setup", playerBoard);
-
-          if (!gameManager.checkFleetPlaced()) {
-            console.log("triggered");
-            displayManager.renderVessel();
-            initializeDragEvents(playerBoard);
-          } else {
-            console.log("All ships placed!");
-            _enableDeployBtn();
-          }
-        } else {
-          console.log("Invalid placement");
-        }
+        _handleDrop(cell);
       }),
     );
 
@@ -161,36 +131,7 @@ const eventController = (() => {
       let dropCell = document.elementFromPoint(touch.clientX, touch.clientY);
 
       if (dropCell && dropCell.classList.contains("gameboard-cell")) {
-        let x = parseInt(dropCell.getAttribute("data-index-x"));
-        let y = parseInt(dropCell.getAttribute("data-index-y"));
-
-        console.log("Dropped at", "x:", x, "y:", y);
-
-        let currentVessel = gameManager.getCurrentVessel();
-        let orientation = vessel.getAttribute("data-orientation");
-
-        if (
-          _validatePlacement(
-            playerBoard.board,
-            { x, y },
-            currentVessel.size,
-            orientation,
-          )
-        ) {
-          gameManager.updateShipPlacement({ x, y }, orientation);
-          displayManager.renderBoard("setup", playerBoard);
-
-          if (!gameManager.checkFleetPlaced()) {
-            console.log("triggered");
-            displayManager.renderVessel();
-            initializeDragEvents(playerBoard);
-          } else {
-            console.log("All ships placed!");
-            _enableDeployBtn();
-          }
-        } else {
-          console.log("Invalid placement");
-        }
+        _handleDrop(dropCell);
       }
     });
   };
@@ -247,6 +188,39 @@ const eventController = (() => {
     previousHoveredCells.forEach((cell) => {
       cell.classList.add(isValid ? "valid-hover" : "invalid-hover");
     });
+  };
+
+  const _handleDrop = (cell) => {
+    let x = parseInt(cell.getAttribute("data-index-x"));
+    let y = parseInt(cell.getAttribute("data-index-y"));
+
+    console.log("Dropped at", "x:", x, "y:", y);
+
+    let currentVessel = gameManager.getCurrentVessel();
+    let orientation = vessel.getAttribute("data-orientation");
+
+    if (
+      _validatePlacement(
+        playerBoard.board,
+        { x, y },
+        currentVessel.size,
+        orientation,
+      )
+    ) {
+      gameManager.updateShipPlacement({ x, y }, orientation);
+      displayManager.renderBoard("setup", playerBoard);
+
+      if (!gameManager.checkFleetPlaced()) {
+        console.log("triggered");
+        displayManager.renderVessel();
+        initializeDragEvents(playerBoard);
+      } else {
+        console.log("All ships placed!");
+        _enableDeployBtn();
+      }
+    } else {
+      console.log("Invalid placement");
+    }
   };
 
   const _handleAttack = (coords) => {
