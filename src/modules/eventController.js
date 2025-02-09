@@ -72,6 +72,7 @@ const eventController = (() => {
     const vessel = document.querySelector(".vessel");
     const gameboardCells = document.querySelectorAll(".gameboard-cell");
     let offsetX, offsetY;
+    let previousHoveredCells = [];
 
     _handleOrientationAction(vessel);
 
@@ -93,6 +94,43 @@ const eventController = (() => {
     gameboardCells.forEach((cell) =>
       cell.addEventListener("dragover", (e) => {
         e.preventDefault();
+        let currentVessel = gameManager.getCurrentVessel();
+        let orientation = vessel.getAttribute("data-orientation");
+        let hoveredCell = null;
+        let isValid = true;
+
+        let x = parseInt(cell.getAttribute("data-index-x"));
+        let y = parseInt(cell.getAttribute("data-index-y"));
+
+        previousHoveredCells.forEach((prevCell) => {
+          if (prevCell) {
+            prevCell.classList.remove("valid-hover", "invalid-hover");
+          }
+        });
+        previousHoveredCells = [];
+
+        for (let i = 0; i < currentVessel.size; i++) {
+          if (orientation === "horizontal") {
+            hoveredCell = document.querySelector(
+              `[data-index-x="${x}"][data-index-y="${y + i}"]`,
+            );
+          }
+          if (orientation === "vertical") {
+            hoveredCell = document.querySelector(
+              `[data-index-x="${x + i}"][data-index-y="${y}"]`,
+            );
+          }
+
+          if (hoveredCell) {
+            previousHoveredCells.push(hoveredCell);
+          } else {
+            isValid = false;
+          }
+        }
+
+        previousHoveredCells.forEach((cell) => {
+          cell.classList.add(isValid ? "valid-hover" : "invalid-hover");
+        });
       }),
     );
 
