@@ -51,6 +51,7 @@ const opponentAI = (() => {
       if (playerBoard.getCellState({ x: x, y: y }) === null) {
         if (
           _validatePlacement(
+            playerBoard,
             playerBoard.board,
             playerBoard.size,
             { x: x, y: y },
@@ -69,16 +70,50 @@ const opponentAI = (() => {
   };
 
   const _validatePlacement = (
+    playerBoard,
     board,
     boardSize,
     coords,
     shipSize,
     orientation,
   ) => {
-    if (orientation === "horizontal" && coords.x + shipSize > boardSize)
+    if (orientation === "horizontal" && coords.y + shipSize > boardSize)
       return false;
-    if (orientation === "vertical" && coords.y + shipSize > boardSize)
+    if (orientation === "vertical" && coords.x + shipSize > boardSize)
       return false;
+
+    for (let i = 0; i < shipSize; i++) {
+      let x = coords.x + (orientation === "vertical" ? i : 0);
+      let y = coords.y + (orientation === "horizontal" ? i : 0);
+
+      console.log(x, y, orientation);
+
+      if (playerBoard.getCellState({ x, y }) !== null) {
+        return false;
+      }
+
+      const directions = [
+        { dx: -1, dy: 0 },
+        { dx: 1, dy: 0 },
+        { dx: 0, dy: -1 },
+        { dx: 0, dy: 1 },
+        { dx: -1, dy: -1 },
+        { dx: -1, dy: 1 },
+        { dx: 1, dy: -1 },
+        { dx: 1, dy: 1 },
+      ];
+
+      for (let { dx, dy } of directions) {
+        let adjX = x + dx;
+        let adjY = y + dy;
+
+        if (adjX >= 0 && adjX < boardSize && adjY >= 0 && adjY < boardSize) {
+          if (playerBoard.getCellState({ x: adjX, y: adjY }) !== null) {
+            return false;
+          }
+        }
+      }
+    }
 
     for (let i = 0; i < shipSize; i++) {
       if (
