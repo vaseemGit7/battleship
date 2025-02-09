@@ -100,6 +100,14 @@ body {
   aspect-ratio: 1/1;
 }
 
+.valid-hover {
+  background-color: #86efac;
+}
+
+.invalid-hover {
+  background-color: #f43f5e;
+}
+
 .cell-hit,
 .cell-miss {
   cursor: not-allowed;
