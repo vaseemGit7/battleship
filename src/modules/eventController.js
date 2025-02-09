@@ -122,7 +122,7 @@ const eventController = (() => {
     gameboardCells.forEach((cell) =>
       cell.addEventListener("drop", (e) => {
         e.preventDefault();
-        _handleDrop(cell);
+        _handleDrop(cell, playerBoard);
       }),
     );
 
@@ -131,7 +131,7 @@ const eventController = (() => {
       let dropCell = document.elementFromPoint(touch.clientX, touch.clientY);
 
       if (dropCell && dropCell.classList.contains("gameboard-cell")) {
-        _handleDrop(dropCell);
+        _handleDrop(dropCell, playerBoard);
       }
     });
   };
@@ -190,14 +190,15 @@ const eventController = (() => {
     });
   };
 
-  const _handleDrop = (cell) => {
+  const _handleDrop = (cell, playerBoard) => {
+    const vessel = document.querySelector(".vessel");
+    let currentVessel = gameManager.getCurrentVessel();
+    let orientation = vessel.getAttribute("data-orientation");
+
     let x = parseInt(cell.getAttribute("data-index-x"));
     let y = parseInt(cell.getAttribute("data-index-y"));
 
     console.log("Dropped at", "x:", x, "y:", y);
-
-    let currentVessel = gameManager.getCurrentVessel();
-    let orientation = vessel.getAttribute("data-orientation");
 
     if (
       _validatePlacement(
