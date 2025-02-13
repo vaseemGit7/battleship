@@ -14,10 +14,10 @@ const gameManager = (() => {
 
   let fleet = {
     1: { name: "carrier", size: 5 },
-    2: { name: "battleship", size: 4 },
-    3: { name: "cruiser", size: 3 },
-    4: { name: "submarine", size: 3 },
-    5: { name: "destroyer", size: 2 },
+    2: { name: "cruiser", size: 4 },
+    3: { name: "destroyer", size: 3 },
+    4: { name: "frigate", size: 3 },
+    5: { name: "submarine", size: 2 },
   };
   let currentVessel = 1;
 
