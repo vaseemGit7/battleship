@@ -36,7 +36,12 @@ export default class Gameboard {
         return false;
       }
       for (let i = coords.y; i < coords.y + ship.size; i++) {
-        this.board[coords.x][i] = { ship, status: "intact" };
+        this.board[coords.x][i] = {
+          ship,
+          status: "intact",
+          origin: coords,
+          orientation: orientation,
+        };
       }
     }
 
@@ -45,7 +50,12 @@ export default class Gameboard {
         return false;
       }
       for (let i = coords.x; i < coords.x + ship.size; i++) {
-        this.board[i][coords.y] = { ship, status: "intact" };
+        this.board[i][coords.y] = {
+          ship,
+          status: "intact",
+          origin: coords,
+          orientation: orientation,
+        };
       }
     }
   }
@@ -76,7 +86,7 @@ export default class Gameboard {
     if (this.board[coords.x][coords.y] !== null) {
       let ship = this.board[coords.x][coords.y].ship;
       ship.hit();
-      this.board[coords.x][coords.y] = { ship, status: "hit" };
+      this.board[coords.x][coords.y].status = "hit";
 
       if (ship.isSunk()) {
         this.shipsSunk++;
