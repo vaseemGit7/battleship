@@ -1,6 +1,12 @@
 import eventController from "./eventController";
 import gameManager from "./gameManager";
 
+import carrierImg from "../assets/carrier.svg";
+import cruiserImg from "../assets/cruiser.svg";
+import destroyerImg from "../assets/destroyer.svg";
+import frigateImg from "../assets/frigate.svg";
+import submarineImg from "../assets/submarine.svg";
+
 const displayManager = (() => {
   const winningPhrases = [
     "Total Annihilation! The enemy fleet is no more!",
@@ -21,6 +27,14 @@ const displayManager = (() => {
     "Your command ends here. The enemy has crushed your fleet!",
     "A tragic loss… The battlefield is silent, save for the wreckage of your fleet!",
   ];
+
+  const shipImages = {
+    carrier: carrierImg,
+    cruiser: cruiserImg,
+    destroyer: destroyerImg,
+    frigate: frigateImg,
+    submarine: submarineImg,
+  };
 
   const playerOneBoard = document.querySelector("#playerOneBoard");
   const playerTwoBoard = document.querySelector("#playerTwoBoard");
@@ -44,16 +58,34 @@ const displayManager = (() => {
         gridCol.classList.add("gameboard-cell");
         gridCol.classList.add("board-col");
 
-        if (playerBoard.getCellState({ x: x, y: y }) !== null) {
-          if (playerBoard.getCellState({ x: x, y: y }).status === "intact") {
-            gridCol.style.cssText = "background-color: #0284c7";
-          } else if (
-            playerBoard.getCellState({ x: x, y: y }).status === "hit"
-          ) {
-            gridCol.classList.add("cell-hit");
-          } else {
-            gridCol.classList.add("cell-miss");
+        if (
+          playerBoard.getCellState({ x: x, y: y }) !== null &&
+          playerBoard.getCellState({ x: x, y: y }).origin.x === x &&
+          playerBoard.getCellState({ x: x, y: y }).origin.y === y
+        ) {
+          const shipName = playerBoard.getCellState({ x: x, y: y }).ship.name;
+          const orientation = playerBoard.getCellState({
+            x: x,
+            y: y,
+          }).orientation;
+          const shipSize = playerBoard.getCellState({ x: x, y: y }).ship.size;
+
+          let shipImg = document.createElement("div");
+          shipImg.classList.add("shipImg");
+          shipImg.style.backgroundImage = `url(${shipImages[shipName]})`;
+
+          if (orientation === "vertical") {
+            shipImg.classList.add("rotate");
           }
+
+          if (player === "playerTwo") {
+            shipImg.classList.add("enemy-ship");
+          }
+
+          shipImg.style.width = `${shipSize * 100}%`;
+          shipImg.style.height = "100%";
+
+          gridCol.appendChild(shipImg);
         }
 
         gridRow.appendChild(gridCol);
