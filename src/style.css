@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --ship-bg: "";
+}
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif, system-ui, "Segoe UI", Roboto, Helvetica,
@@ -21,7 +25,25 @@ body {
 }
 
 .rotate {
-  rotate: 90deg;
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: top left;
+}
+
+.shipImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(72%) sepia(57%) saturate(7189%) hue-rotate(172deg)
+    brightness(101%) contrast(104%);
+  z-index: 10;
+}
+
+.enemy-ship {
+  filter: invert(51%) sepia(82%) saturate(505%) hue-rotate(345deg)
+    brightness(92%) contrast(106%);
 }
 
 .game-intro-section,
