@@ -160,21 +160,18 @@ const opponentAI = (() => {
       bottom = { x: pivotHit.x + 1, y: pivotHit.y };
 
       if (
-        searchQueue.length === 0 &&
-        ((board.getCellState(left) &&
+        (board.getCellState(left) &&
           board.getCellState(left).status === "hit") ||
-          (board.getCellState(right) &&
-            board.getCellState(right).status === "hit"))
+        (board.getCellState(right) &&
+          board.getCellState(right).status === "hit")
       ) {
-        searchQueue = [left, right];
+        searchQueue.push(left, right);
       } else if (
-        searchQueue.length === 0 &&
-        ((board.getCellState(top) &&
-          board.getCellState(top).status === "hit") ||
-          (board.getCellState(bottom) &&
-            board.getCellState(bottom).status === "hit"))
+        (board.getCellState(top) && board.getCellState(top).status === "hit") ||
+        (board.getCellState(bottom) &&
+          board.getCellState(bottom).status === "hit")
       ) {
-        searchQueue = [top, bottom];
+        searchQueue.push(top, bottom);
       } else {
         searchQueue = [left, right, top, bottom];
       }
