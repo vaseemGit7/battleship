@@ -106,10 +106,14 @@ const displayManager = (() => {
     const vesselEle = document.createElement("div");
 
     const vessel = gameManager.getCurrentVessel();
-    vesselName.textContent = `PLACE YOUR ${vessel.name}`;
+    const name = vessel.name;
+    const size = vessel.size;
+    vesselName.textContent = `PLACE YOUR ${name}`;
 
     vesselEle.classList.add("vessel");
-    vesselEle.style.cssText = `height: 40px; width: ${vessel.size * 40}px; background-color: blue`;
+    vesselEle.style.backgroundImage = `url(${shipImages[name]})`;
+    vesselEle.style.height = "3.5rem";
+    vesselEle.style.width = `${size * 3.5}rem`;
     vesselEle.draggable = "true";
     vesselEle.setAttribute("data-orientation", "horizontal");
 
