@@ -22,6 +22,7 @@ const eventController = (() => {
       proceedBtn.disabled = true;
       proceedBtn.classList.add("disabled-btn");
       gameManager.resetShipPlacement();
+      displayManager.renderVessel();
     });
   };
 
@@ -55,6 +56,7 @@ const eventController = (() => {
     const proceedBtn = document.querySelector("#proceedBtn");
     proceedBtn.disabled = false;
     proceedBtn.classList.remove("disabled-btn");
+    displayManager.updateFleetStatus();
   };
 
   const _handleOrientationAction = (vessel) => {
