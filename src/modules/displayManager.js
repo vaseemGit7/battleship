@@ -139,6 +139,15 @@ const displayManager = (() => {
     }
   };
 
+  const updateFleetStatus = () => {
+    const vesselContainer = document.querySelector("#vesselContainer");
+    const vesselName = document.querySelector("#currentVessel");
+    const vesselEle = document.querySelector(".vessel");
+
+    vesselName.textContent = "DEPLOY THE FLEET !!!";
+    vesselContainer.removeChild(vesselEle);
+  };
+
   const switchBoardFocus = (targetPlayer) => {
     const playerOnePanel = document.querySelector(".player-one-panel");
     const playerTwoPanel = document.querySelector(".player-two-panel");
@@ -234,6 +243,7 @@ const displayManager = (() => {
     renderVessel,
     initializeEventListeners,
     updateCell,
+    updateFleetStatus,
     updateWinner,
     switchBoardFocus,
     loadPlacementScreen,
