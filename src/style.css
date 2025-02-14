@@ -152,6 +152,14 @@ body {
   text-transform: uppercase;
 }
 
+.vessel {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(72%) sepia(57%) saturate(7189%) hue-rotate(172deg)
+    brightness(101%) contrast(104%);
+}
+
 .ship-actions,
 .placement-actions {
   width: 70%;
