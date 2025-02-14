@@ -8,7 +8,15 @@ export default class Gameboard {
   }
 
   getCellState(coords) {
-    return this.board[coords.x][coords.y];
+    if (
+      coords.x >= 0 &&
+      coords.x < this.size &&
+      coords.y >= 0 &&
+      coords.y < this.size
+    ) {
+      return this.board[coords.x][coords.y];
+    }
+    return false;
   }
 
   placeShip(ship, coords, orientation) {
