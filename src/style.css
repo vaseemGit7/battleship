@@ -18,6 +18,7 @@ body {
 
 .disabled-btn {
   opacity: 0.4 !important;
+  pointer-events: none;
 }
 
 .rotate {
@@ -96,6 +97,8 @@ body {
   background-color: transparent;
   color: #ffffff;
   border: none;
+  transition: background-color 0.4s ease-in-out;
+  transition: color 0.4s ease-in-out;
 }
 
 .ship-placement-container {
@@ -113,6 +116,11 @@ body {
     rgba(3, 66, 103, 0.5) 50%,
     rgba(0, 119, 173, 0.5) 100%
   );
+  pointer-events: none;
+}
+
+.setup-board {
+  pointer-events: auto;
 }
 
 .board-row {
@@ -136,7 +144,6 @@ body {
 
 .cell-hit,
 .cell-miss {
-  cursor: not-allowed;
   pointer-events: none;
 }
 
@@ -205,6 +212,7 @@ body {
     rgba(103, 51, 3, 0.5) 50%,
     rgba(173, 89, 0, 0.5) 100%
   );
+  cursor: crosshair;
 }
 
 .player-two-panel .player-board .board-col {
@@ -229,6 +237,10 @@ body {
 .board-focus {
   width: 100%;
   transition: width 0.5s ease-in-out;
+}
+
+.board-focus .player-board {
+  pointer-events: auto;
 }
 
 .player-one-panel {
@@ -261,15 +273,26 @@ body {
   margin: 15px;
 }
 
+.confirm-btn:hover,
+.orientation-btn:hover,
+.random-btn:hover,
+.reset-btn:hover,
+.proceed-btn:hover,
+.playagain-btn:hover {
+  color: rgba(0, 0, 0, 0.75);
+  background-color: #ffffff;
+  outline-color: rgba(0, 0, 0, 0.75);
+}
+
 .cell-hit::after,
 .cell-miss::after {
   position: absolute;
   content: "";
-  top: 25%;
-  left: 25%;
-  z-index: 1;
-  width: 50%;
-  height: 50%;
+  top: 32%;
+  left: 32%;
+  z-index: 20;
+  width: 33%;
+  height: 33%;
   border-radius: 100%;
   background-color: #dc2626;
 }
@@ -306,5 +329,9 @@ body {
 
   .panel-name {
     font-size: 1.2rem;
+  }
+
+  .vessel-container:hover {
+    scale: 1.05;
   }
 }
