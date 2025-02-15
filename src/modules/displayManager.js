@@ -156,7 +156,7 @@ const displayManager = (() => {
     playerTwoPanel.classList.remove("board-focus");
 
     let playerPanel =
-      targetPlayer.type === "human" ? playerTwoPanel : playerOnePanel;
+      targetPlayer.type === "human" ? playerOnePanel : playerTwoPanel;
 
     playerPanel.classList.add("board-focus");
   };
