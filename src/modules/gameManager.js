@@ -115,9 +115,11 @@ const gameManager = (() => {
     _attackOpponent(coords);
     displayManager.updateCell(opponentPlayer, coords);
     _checkGameOver();
-    _switchPlayer();
-    displayManager.switchBoardFocus(opponentPlayer);
-    _getComputerAttack();
+    setTimeout(() => {
+      _switchPlayer();
+      displayManager.switchBoardFocus(opponentPlayer);
+      _getComputerAttack();
+    }, 1000);
   };
 
   const _attackOpponent = (coords) => {
@@ -134,7 +136,7 @@ const gameManager = (() => {
       const coords = opponentAI.getRandomAttack(opponentPlayer.board);
       setTimeout(() => {
         playTurn(coords);
-      }, "500");
+      }, 1300);
     }
     return;
   };
