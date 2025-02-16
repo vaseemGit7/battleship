@@ -25,7 +25,7 @@ const gameManager = (() => {
   playerTwo = new Player("computer");
 
   const updatePlayerOneName = (name) => {
-    playerOne.name = name;
+    name !== undefined ? (playerOne.name = name) : "Player";
   };
 
   const updateShipPlacement = (coords, orientation) => {
@@ -98,7 +98,7 @@ const gameManager = (() => {
     displayManager.renderBoard("playerTwo", playerTwo.board);
     displayManager.switchBoardFocus(opponentPlayer);
 
-    displayManager.initializeEventListeners();
+    eventController.initializeBattleEvents();
   };
 
   const playTurn = (coords) => {
