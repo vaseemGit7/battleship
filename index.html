@@ -8,6 +8,7 @@
   </head>
   <body>
     <section class="game-intro-section">
+      <div class="game-logo"></div>
       <div class="player-name-container">
         <label for="playerName">FLEET COMMANDER</label>
         <input type="text" id="playerName" placeholder="Enter your Name here" />
@@ -24,7 +25,7 @@
           <button class="random-btn" id="randomBtn">RANDOM</button>
         </div>
         <div class="vessel-container" id="vesselContainer"></div>
-        <div class="player-board" id="shipPlacementBoard"></div>
+        <div class="player-board setup-board" id="shipPlacementBoard"></div>
         <div class="placement-actions">
           <button class="reset-btn" id="resetBtn">RESET</button>
           <button disabled class="proceed-btn disabled-btn" id="proceedBtn">
@@ -46,6 +47,7 @@
       </div>
     </section>
     <section class="gameover-section screen-hidden">
+      <div class="game-logo"></div>
       <div class="gameover-container">
         <p class="winner-announcement" id="winnerAnnouncement"></p>
         <p class="gameover-phrase" id="gameOverPhrase"></p>
