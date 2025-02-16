@@ -29,9 +29,6 @@ const gameManager = (() => {
   };
 
   const updateShipPlacement = (coords, orientation) => {
-    console.log(fleet[currentVessel].name);
-    console.log("recieved coords", coords);
-
     const vessel = fleet[currentVessel];
     const ship = new Ship(vessel.size, vessel.name);
 
@@ -53,13 +50,6 @@ const gameManager = (() => {
 
       playerBoard.placeShip(
         ship,
-        placementData.coords,
-        placementData.orientation,
-      );
-
-      console.log(
-        "Ship Placed:",
-        vesselSize,
         placementData.coords,
         placementData.orientation,
       );
@@ -144,7 +134,6 @@ const gameManager = (() => {
   const _checkGameOver = () => {
     if (opponentPlayer.board.isFleetSunk()) {
       winner = currentPlayer;
-      console.log("Game Over: ", currentPlayer.type, " is the winner");
       setTimeout(() => {
         displayManager.loadGameOverScreen();
       }, "1000");

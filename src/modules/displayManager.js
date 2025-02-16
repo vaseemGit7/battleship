@@ -145,7 +145,6 @@ const displayManager = (() => {
           );
           let shipImg = shipCell.querySelector(".shipImg");
           shipImg.classList.remove("ship-hidden");
-          console.log("Ship cell found!", shipCell);
         }
       } else {
         cell.classList.add("cell-miss");

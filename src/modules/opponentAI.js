@@ -6,32 +6,24 @@ const opponentAI = (() => {
     let isValid = false;
     let coords;
 
-    console.log("queue", searchQueue);
-    console.log("pivot", pivotHit);
-
     while (
       searchQueue.length > 0 &&
       !board.getCellState(pivotHit).ship.isSunk()
     ) {
-      console.log("queue while");
       let guessCoord = searchQueue.shift();
       if (_validateAdjacent(guessCoord, board)) {
-        console.log("Coord", guessCoord);
         processAttack(guessCoord, board);
         return guessCoord;
       }
     }
 
     while (!isValid) {
-      console.log("random while");
-
       let x = Math.floor(Math.random() * 10);
       let y = Math.floor(Math.random() * 10);
       if (
         board.getCellState({ x: x, y: y }) === null ||
         board.getCellState({ x: x, y: y }).status === "intact"
       ) {
-        console.log("within if: ", x, y, board.getCellState({ x: x, y: y }));
         processAttack({ x: x, y: y }, board);
         coords = { x: x, y: y };
         isValid = true;
@@ -89,8 +81,6 @@ const opponentAI = (() => {
       let x = coords.x + (orientation === "vertical" ? i : 0);
       let y = coords.y + (orientation === "horizontal" ? i : 0);
 
-      console.log(x, y, orientation);
-
       if (playerBoard.getCellState({ x, y }) !== null) {
         return false;
       }
@@ -133,24 +123,20 @@ const opponentAI = (() => {
   };
 
   const _validateAdjacent = (coords, board) => {
-    console.log(coords, coords.x, coords.y);
     if (
       coords.x >= 0 &&
       coords.x < board.size &&
       coords.y >= 0 &&
       coords.y < board.size
     ) {
-      console.log(coords, " : true");
       const cell = board.getCellState(coords);
       return cell === null || (cell && cell.status === "intact");
     }
-    console.log(coords, " : false");
     return false;
   };
 
   const processAttack = (coords, board) => {
     let left, right, top, bottom;
-    console.log("process attack");
     if (
       board.getCellState(coords) !== null &&
       board.getCellState(coords).status === "intact"

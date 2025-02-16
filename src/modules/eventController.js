@@ -10,7 +10,6 @@ const eventController = (() => {
     confirmBtn.addEventListener("click", () => {
       const playerNameInput = document.querySelector("#playerName").value;
       displayManager.loadPlacementScreen(playerNameInput);
-      console.log("Name:", playerNameInput);
     });
   };
 
@@ -79,9 +78,7 @@ const eventController = (() => {
 
     _handleOrientationAction(vessel);
 
-    vessel.addEventListener("dragstart", () => {
-      console.log("Drag Started");
-    });
+    vessel.addEventListener("dragstart", () => {});
 
     vessel.addEventListener("touchstart", (e) => {
       const touch = e.touches[0];
@@ -91,7 +88,6 @@ const eventController = (() => {
       offsetY = touch.clientY - rect.top;
 
       vessel.style.position = "absolute";
-      console.log("Touch drag started");
     });
 
     gameboardCells.forEach((cell) =>
@@ -139,7 +135,8 @@ const eventController = (() => {
   };
 
   const init = () => {
-    const gameboardCells = document.querySelectorAll(".gameboard-cell");
+    const playerTwoBoard = document.querySelector("#playerTwoBoard");
+    const gameboardCells = playerTwoBoard.querySelectorAll(".gameboard-cell");
 
     gameboardCells.forEach((cell) =>
       cell.addEventListener("click", () => {
@@ -200,8 +197,6 @@ const eventController = (() => {
     let x = parseInt(cell.getAttribute("data-index-x"));
     let y = parseInt(cell.getAttribute("data-index-y"));
 
-    console.log("Dropped at", "x:", x, "y:", y);
-
     if (
       _validatePlacement(
         playerBoard.board,
@@ -214,24 +209,18 @@ const eventController = (() => {
       displayManager.renderBoard("setup", playerBoard);
 
       if (!gameManager.checkFleetPlaced()) {
-        console.log("triggered");
         displayManager.renderVessel();
         initializeDragEvents(playerBoard);
       } else {
-        console.log("All ships placed!");
         _enableDeployBtn();
       }
     } else {
-      console.log("Invalid placement");
     }
   };
 
   const _handleAttack = (coords) => {
     let opponentBoard = gameManager.getOpponentPlayer().board;
     gameManager.playTurn(coords);
-
-    console.log("hit");
-    console.log(opponentBoard);
   };
 
   const _validatePlacement = (board, coords, size, orientation) => {
