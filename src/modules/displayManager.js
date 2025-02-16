@@ -174,10 +174,6 @@ const displayManager = (() => {
     playerPanel.classList.add("board-focus");
   };
 
-  const initializeEventListeners = () => {
-    eventController.init();
-  };
-
   const loadPlacementScreen = (playerName) => {
     const gameIntroScreen = document.querySelector(".game-intro-section");
     const shipPlacementScreen = document.querySelector(
@@ -254,7 +250,6 @@ const displayManager = (() => {
   return {
     renderBoard,
     renderVessel,
-    initializeEventListeners,
     updateCell,
     updateFleetStatus,
     updateWinner,
