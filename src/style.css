@@ -77,7 +77,8 @@ body {
 
 .player-name-container,
 .ship-placement-container,
-.gameover-container {
+.gameover-container,
+.profile-link {
   width: 95%;
   max-width: 480px;
   display: flex;
@@ -92,6 +93,21 @@ body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.profile-link {
+  max-width: 100px;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+ion-icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.9rem;
+  color: white;
 }
 
 .player-name-container label {
@@ -307,6 +323,11 @@ body {
 
 .playagain-btn {
   margin: 15px;
+}
+
+ion-icon:hover {
+  scale: 1.15;
+  transition: scale 0.3s ease-in-out;
 }
 
 .confirm-btn:hover,
