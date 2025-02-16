@@ -9,7 +9,10 @@ const opponentAI = (() => {
     console.log("queue", searchQueue);
     console.log("pivot", pivotHit);
 
-    while (searchQueue.length > 0) {
+    while (
+      searchQueue.length > 0 &&
+      !board.getCellState(pivotHit).ship.isSunk()
+    ) {
       console.log("queue while");
       let guessCoord = searchQueue.shift();
       if (_validateAdjacent(guessCoord, board)) {
