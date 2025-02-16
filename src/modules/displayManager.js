@@ -85,6 +85,10 @@ const displayManager = (() => {
           shipImg.style.width = `${shipSize * 100}%`;
           shipImg.style.height = "100%";
 
+          if (player === "playerTwo") {
+            shipImg.classList.add("ship-hidden");
+          }
+
           gridCol.appendChild(shipImg);
         }
 
@@ -128,11 +132,21 @@ const displayManager = (() => {
       `[data-index-x = "${coords.x}"][data-index-y = "${coords.y}"]`,
     );
 
-    if (targetPlayer.board.getCellState(coords) !== null) {
-      if (targetPlayer.board.getCellState(coords).status === "intact") {
-        cell.style.cssText = "background-color: #0284c7";
-      } else if (targetPlayer.board.getCellState(coords).status === "hit") {
+    const coordState = targetPlayer.board.getCellState(coords);
+
+    if (coordState !== null) {
+      if (coordState.status === "hit") {
         cell.classList.add("cell-hit");
+
+        if (coordState.ship.isSunk()) {
+          const origin = coordState.origin;
+          let shipCell = playerBoard.querySelector(
+            `[data-index-x = "${origin.x}"][data-index-y = "${origin.y}"]`,
+          );
+          let shipImg = shipCell.querySelector(".shipImg");
+          shipImg.classList.remove("ship-hidden");
+          console.log("Ship cell found!", shipCell);
+        }
       } else {
         cell.classList.add("cell-miss");
       }
