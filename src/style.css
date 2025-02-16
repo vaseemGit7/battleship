@@ -16,7 +16,8 @@ body {
   background-position: center;
 }
 
-.screen-hidden {
+.screen-hidden,
+.ship-hidden {
   display: none !important;
 }
 
