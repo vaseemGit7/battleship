@@ -62,9 +62,10 @@ const eventController = (() => {
     const orientationBtn = document.querySelector("#orientationBtn");
 
     orientationBtn.addEventListener("click", () => {
-      vessel.classList.toggle("rotate");
-
       let currentOrientation = vessel.getAttribute("data-orientation");
+      orientationBtn.textContent =
+        currentOrientation === "horizontal" ? "AXIS: Y" : "AXIS: X";
+
       let newOrientation =
         currentOrientation === "horizontal" ? "vertical" : "horizontal";
       vessel.setAttribute("data-orientation", newOrientation);
@@ -134,7 +135,7 @@ const eventController = (() => {
     });
   };
 
-  const init = () => {
+  const initializeBattleEvents = () => {
     const playerTwoBoard = document.querySelector("#playerTwoBoard");
     const gameboardCells = playerTwoBoard.querySelectorAll(".gameboard-cell");
 
@@ -143,7 +144,7 @@ const eventController = (() => {
         let x = cell.getAttribute("data-index-x");
         let y = cell.getAttribute("data-index-y");
 
-        _handleAttack({ x: x, y: y });
+        gameManager.playTurn({ x: x, y: y });
       }),
     );
   };
@@ -218,11 +219,6 @@ const eventController = (() => {
     }
   };
 
-  const _handleAttack = (coords) => {
-    let opponentBoard = gameManager.getOpponentPlayer().board;
-    gameManager.playTurn(coords);
-  };
-
   const _validatePlacement = (board, coords, size, orientation) => {
     if (orientation === "horizontal" && coords.x + size > board.size)
       return false;
@@ -244,12 +240,15 @@ const eventController = (() => {
     return true;
   };
 
-  _handleDeployFleet();
+  const init = () => {
+    handlePlayerInput();
+    _handleDeployFleet();
+  };
 
   return {
     init,
+    initializeBattleEvents,
     initializeDragEvents,
-    handlePlayerInput,
     handleResetPlacement,
     handleRandomizePlacement,
     handlePlayAgain,
